@@ -8,6 +8,6 @@ let compiler = webpack(config);
 app.use(webpackDevMiddleware(compiler, {
 	publicPath: '/'
 }));
-app.listen(4000, () => {
-	console.log('listening port 4000');
+app.listen(3000, () => {
+	console.log('listening port 3000');
 });

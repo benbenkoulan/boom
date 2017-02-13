@@ -1,0 +1,23 @@
+* { font-family: '微软雅黑'; color: #6e6e6e; }
+html, body, div, p, pre, ul, dl, header, footer, main, form, article, h1, h2, h3, h4, h5, h6, figure
+{ margin: 0; padding: 0; }
+
+.w100 { width: 100%; }
+.h100 { height: 100%; }
+
+.bsbb { box-sizing: border-box; }
+
+.df { display: flex; }
+.dif { display: inline-flex; }
+.dt { display: table; }
+.dtc { display: table-cell; }
+
+.tac { text-align: center; }
+
+.pf { position: fixed; }
+.pa { position: absolute; }
+.pr { position: relative; }
+.l0 { left: 0; }
+.r0 { right: 0; }
+.t0 { top: 0; }
+.b0 { bottom: 0; }
