@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config build/webpack.config.js --progress --watch",
-    "dev": "node server"
+    "build-dev": "cross-env NODE_ENV=development webpack --config build/webpack.config.js --progress --hide-modules",
+    "dev": "cross-env NODE_ENV=development node server",
+    "start": "npm run build-dev && npm run dev"
   },
   "author": "liben",
   "license": "ISC",
@@ -15,6 +16,7 @@
     "babel-loader": "^6.2.10",
     "babel-polyfill": "^6.22.0",
     "babel-preset-es2015": "^6.22.0",
+    "cross-env": "^3.1.4",
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "file-loader": "^0.10.0",
