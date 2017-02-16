@@ -1,5 +1,6 @@
 <template>
 	<div class="page">
+		<img src="../../img/test.jpg" alt="" class="w100">
 		<nav-bar></nav-bar>
 	</div>
 </template>
@@ -9,3 +10,6 @@
 		components: { navBar }
 	}
 </script>
+<style scoped>
+	img { max-width: 100% }
+</style>

@@ -5,7 +5,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 
+var hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';//添加到每个入口文件中
+
 const isDev = process.env.NODE_ENV === 'development';
+
+const chunkhash = 'chunkhash';
+const hash = 'hash';
 
 let plugins = [new CommonsChunkPlugin({ name: 'vender', minChunks: Infinity }),
 				new CommonsChunkPlugin({ name: 'manifest', chunks: ['vendor']}),	//将运行时代码单独打包
@@ -19,22 +24,29 @@ let plugins = [new CommonsChunkPlugin({ name: 'vender', minChunks: Infinity }),
 					'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
 				})
 			];
-if(!isDev){
+let main = ['./main.js'],
+	vender = ['underscore', 'vue'];
+if(isDev){
+	plugins.push.call(plugins, new webpack.HotModuleReplacementPlugin(), new webpack.NoEmitOnErrorsPlugin());//引入热模块替换插件
+	main.push(hotMiddlewareScript);
+	vender.push(hotMiddlewareScript);
+} else {
 	plugins.push(new webpack.optimize.UglifyJsPlugin({
 		compress: {
 		  warnings: false
 		}
 	}));
 }
+
 module.exports = {
 	entry: {
-		main: ['./main.js'],
-		vender: ['underscore', 'vue']
+		main: main,
+		vender: vender
 	},
 	output: {
 		publicPath: '/',
 		path: path.resolve('../dist'),
-		filename: '[chunkhash:8].[name].js',
+		filename: `js/[${isDev ? hash : chunkhash}:8].[name].js`,	//热模块替换不支持chunkhash，开发时使用hash
 		chunkFilename: 'js/module/[chunkhash:8].js'
 	},
 	plugins: plugins,

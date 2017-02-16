@@ -1,15 +1,5 @@
-import func from 'util/func';
-import { throttle } from 'underscore';
 import common from './css/common.css';
 import vue from 'vue';
-
-/*let arr = [ {name: 'liben', sex: 'male'}, {name: 'jinxue', sex: 'female'} ];
-arr = arr.map(person => {
-	person.name += '--human';
-	return person;
-});
-
-let queryDiv = document.querySelector.partial('div');*/
 
 let win = window,
 	doc = document,
@@ -25,18 +15,22 @@ doc.addEventListener('click', e => {
 });
 
 win.addEventListener('popstate', () => {
-	route(loc.pathname);
+	route();
 });
 
 let route = (url => {
+	url = url || loc.pathname;
 	if(vm) vm.$destroy();
-	let filePath = url.replace(/^\//, '').replace(/.htm$/, '');
+	let filePath = url.replace(/^\//, '').replace(/.htm$/, '') || 'index';
 	System.import('./page/' + filePath + '/index').then(page => {
 		vm = new vue(page);
 		vm.$mount('.page');
 	}).catch(e => {
 		console.log(e);
 	});
-	history.pushState(null, null, url);
+	if(url != loc.pathname){
+		history.pushState(null, null, url);
+	}
 });
 
+route();

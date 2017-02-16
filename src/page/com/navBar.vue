@@ -1,7 +1,7 @@
 <template>
 	<footer class="pf l0 b0 dt w100">
 		<a class="dtc bsbb tac " href="/home.htm" :class="[index == 1 ? 'nav-home-active' : 'nav-home']" @click="setTitle">{{title}}</a>
-		<a class="dtc bsbb tac " href="#" :class="[index == 2 ? ' nav-account-active' : 'nav-account']">我的</a>
+		<a class="dtc bsbb tac " href="#" :class="[index == 2 ? ' nav-account-active' : 'nav-account']">账户</a>
 	</footer>
 </template>
 <script>
