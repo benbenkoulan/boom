@@ -10,3 +10,5 @@ pro: npm run build<br>
 	npm run pro<br>
 	or<br>
 	npm run start
+
+    localhost:3000

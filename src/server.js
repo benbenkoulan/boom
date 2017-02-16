@@ -35,6 +35,11 @@ app.get(/.(html?)$/, (req, res) => {
 	res.send(html);
 });
 
+app.get('', (req, res) => {
+	res.type('.html');
+	res.send(html);
+});
+
 app.listen(3000, () => {
 	console.log('server started,listening port 3000');
 });
