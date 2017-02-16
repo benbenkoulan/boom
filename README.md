@@ -4,11 +4,10 @@
 command:
 npm install
 dev : npm run build-dev
-      npm run dev
-      or
-      npm run start-dev
+	npm run dev
+	or
+	npm run start-dev
 pro: npm run build
-     npm run pro
-     or
-     npm run start
-    
+	npm run pro
+	or
+	npm run start
