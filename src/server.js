@@ -9,7 +9,7 @@ const isDev = (process.env.NODE_ENV === 'development');
 let app = new express();
 let compiler = webpack(config);
 let html = '';
-if(isDev){
+if(isDev){//开发环境使用webpack-dev-server
 	const devMidlleware = require('webpack-dev-middleware')(compiler, {
 		publicPath: '/'	//和配置文件保持一致
 	});
