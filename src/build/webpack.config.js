@@ -46,7 +46,7 @@ module.exports = {
 	output: {
 		publicPath: '/',
 		path: path.resolve('../dist'),
-		filename: `js/[${isDev ? hash : chunkhash}:8].[name].js`,	//热模块替换不支持chunkhash，开发时使用hash
+		filename: `js/[${isDev ? hash : chunkhash}:8].[name].js`,	//热模块替换不支持chunkhash(每次文件变化才会变)，开发时使用hash(每次编译都会变化)
 		chunkFilename: 'js/module/[chunkhash:8].js'
 	},
 	plugins: plugins,
@@ -81,9 +81,9 @@ module.exports = {
 			{
 				test: /\.(png|jpe?g|gif|svg)$/,
 				exclude: /node_modules/,
-				loader: 'file-loader',
+				loader: 'url-loader',
 				query: {
-					limit: 20000,
+					limit: 2000,//小文件直接内嵌到页面上，减少请求
 					name: '[path][name].[hash:8].[ext]'
 				}
 			}

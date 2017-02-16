@@ -21,7 +21,7 @@ win.addEventListener('popstate', () => {
 let route = (url => {
 	url = url || loc.pathname;
 	if(vm) vm.$destroy();
-	let filePath = url.replace(/^\//, '').replace(/.htm$/, '') || 'index';
+	let filePath = url.replace(/^\//, '').replace(/.htm$/, '') || 'index';//首页
 	System.import('./page/' + filePath + '/index').then(page => {
 		vm = new vue(page);
 		vm.$mount('.page');
