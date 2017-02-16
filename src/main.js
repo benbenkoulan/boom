@@ -17,7 +17,7 @@ doc.addEventListener('click', e => {
 win.addEventListener('popstate', () => {
 	route();
 });
-
+//路由
 let route = (url => {
 	url = url || loc.pathname;
 	if(vm) vm.$destroy();
