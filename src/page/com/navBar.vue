@@ -28,7 +28,8 @@
 	}
 </script>
 <style scoped>
-	footer { height: 50px; border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc; }
+	@import '../../css/vars.css';
+	footer { height: 50px; border-top: 1px solid var(--color-main); border-bottom: 1px solid var(--color-main); }
 	footer a { padding-top: 26px; background-repeat: no-repeat; background-size: 20px; background-position: center 4px; width: 0.1%; }
 	.nav-home { background-image: url(../../img/home.svg); }
 	.nav-account { background-image: url(../../img/account.svg); }

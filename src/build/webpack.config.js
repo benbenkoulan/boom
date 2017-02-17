@@ -51,7 +51,7 @@ module.exports = {
 	},
 	plugins: plugins,
 	module: {
-		loaders: [
+		rules: [
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
@@ -59,30 +59,26 @@ module.exports = {
 			},
 			{
 				test: /\.vue$/,
-				exclude: /node_modules/,
-				loader: 'vue-loader',
-				options: {
-					loaders: {//将vue文件中的style提取到文件中
-			            css: ExtractTextPlugin.extract({
-			              loader: 'css-loader',
-			              fallback: 'vue-style-loader' // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
+				use: [{
+					loader: 'vue-loader',
+					options:{
+						loader: ExtractTextPlugin.extract({
+			              use: ['css-loader', 'postcss-loader'],
+			              fallback: 'vue-style-loader'
 			            })
-			        }
-				}
+					}
+				}]
 			},
 			{
 				test: /\.css$/,
 				exclude: /node_modules/,
-				loader: ExtractTextPlugin.extract({
-					loader: 'css-loader',
-					fallback: 'style-loader'
-				})
+				loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: ['css-loader', 'postcss-loader']})
 			},
 			{
 				test: /\.(png|jpe?g|gif|svg)$/,
 				exclude: /node_modules/,
 				loader: 'url-loader',
-				query: {
+				options: {
 					limit: 2000,//小文件直接内嵌到页面上，减少请求
 					name: '[path][name].[hash:8].[ext]'
 				}

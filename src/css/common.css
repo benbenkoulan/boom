@@ -1,6 +1,8 @@
-* { font-family: '微软雅黑'; color: #6e6e6e; }
+@import './vars.css';
+* { font-family: '微软雅黑'; color: var(--color-main); }
 html, body, div, p, pre, ul, dl, header, footer, main, form, article, h1, h2, h3, h4, h5, h6, figure
 { margin: 0; padding: 0; }
+html, body, .page { width: 100%; height: 100%; overflow: hidden; background-color: var(--back-main); }
 
 .w100 { width: 100%; }
 .h100 { height: 100%; }
@@ -21,3 +23,5 @@ html, body, div, p, pre, ul, dl, header, footer, main, form, article, h1, h2, h3
 .r0 { right: 0; }
 .t0 { top: 0; }
 .b0 { bottom: 0; }
+
+.ofh { overflow: hidden; }
