@@ -1,5 +1,7 @@
 import common from './css/common.css';
 import vue from 'vue';
+import underscore from 'underscore';
+import babelPolyfill from 'babel-polyfill';
 
 let win = window,
 	doc = document,
@@ -24,6 +26,15 @@ let route = (url => {
 	let filePath = url.replace(/^\//, '').replace(/.htm$/, '') || 'index';//首页
 	System.import('./page/' + filePath + '/index').then(page => {
 		vm = new vue(page);
+		if(vm.getData){
+			let getDataPromise = vm.getData();
+			if(getDataPromise instanceof Promise){
+				getDataPromise.then(() => {
+					vm.$mount('.page');
+				});
+				return;
+			}
+		}
 		vm.$mount('.page');
 	}).catch(e => {
 		console.log(e);

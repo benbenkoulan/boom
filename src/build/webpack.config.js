@@ -16,8 +16,7 @@ let plugins = [new CommonsChunkPlugin({ name: 'vender', minChunks: Infinity }),
 				new CommonsChunkPlugin({ name: 'manifest', chunks: ['vendor']}),	//将运行时代码单独打包
 				new HtmlWebpackPlugin({ template: './index.html', 
 					filename: 'index.html', 
-					chunks : ['main', 'vender'], 
-			        chunksSortMode: 'dependency' }),
+					chunks : ['main', 'vender'] }),
 				new InlineManifestWebpackPlugin({ name: 'webpackManifest' }),//将运行时代码内嵌到HTML中，减少请求
 				new ExtractTextPlugin('css/style.[contenthash:8].css'),
 				new webpack.DefinePlugin({
@@ -25,7 +24,7 @@ let plugins = [new CommonsChunkPlugin({ name: 'vender', minChunks: Infinity }),
 				})
 			];
 let main = ['./main.js'],
-	vender = ['underscore', 'vue'];
+	vender = ['underscore', 'vue', 'babel-polyfill'];
 if(isDev){
 	plugins.push.call(plugins, new webpack.HotModuleReplacementPlugin(), new webpack.NoEmitOnErrorsPlugin());//引入热模块替换插件
 	main.push(hotMiddlewareScript);

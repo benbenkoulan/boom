@@ -2,7 +2,7 @@
   "name": "boom",
   "version": "1.0.0",
   "description": "search webpack to death",
-  "main": "index.js",
+  "main": "main",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.config.js --progress --hide-modules",
