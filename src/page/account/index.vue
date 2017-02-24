@@ -1,12 +1,12 @@
 <template>
 	<div class="page">
 		<div>我的账户</div>
-		<nav-bar :index="2"></nav-bar>
+		<footer-nav :index="2"></footer-nav>
 	</div>
 </template>
 <script>
-	import navBar from 'com/navBar';
+	import footerNav from 'com/footerNav';
 	export default {
-		components: { navBar }
+		components: { footerNav }
 	}
 </script>

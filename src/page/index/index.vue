@@ -1,14 +1,22 @@
 <template>
 	<div class="page">
-		<img src="../../img/test.jpg" alt="" class="w100">
-		<div>{{text}}</div>
-		<nav-bar></nav-bar>
+		<div @click="showAlert = true">{{text}}</div>
+		<alert :show="showAlert" @ok="showAlert = false">
+			<p>哈哈哈哈</p>
+		</alert>
+		<footer-nav></footer-nav>
 	</div>
 </template>
 <script>
-	import navBar from 'com/navBar';
+	import footerNav from 'com/footerNav';
+	import alert from 'com/alert';
 	export default {
-		components: { navBar },
+		data() {
+			return {
+				showAlert: false
+			}
+		},
+		components: { footerNav, alert },
 		mounted (){
 			
 		},

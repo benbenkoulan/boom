@@ -24,7 +24,7 @@ let plugins = [new CommonsChunkPlugin({ name: 'vender', minChunks: Infinity }),
 				})
 			];
 let main = ['./main.js'],
-	vender = ['underscore', 'vue', 'babel-polyfill'];
+	vender = ['underscore', 'vue', 'core-js/shim'];
 if(isDev){
 	plugins.push.call(plugins, new webpack.HotModuleReplacementPlugin(), new webpack.NoEmitOnErrorsPlugin());//引入热模块替换插件
 	main.push(hotMiddlewareScript);

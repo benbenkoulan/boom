@@ -1,20 +1,16 @@
-@import './vars.css';
-* { font-family: '微软雅黑'; color: var(--color-main); }
-html, body, div, p, pre, ul, dl, header, footer, main, form, article, h1, h2, h3, h4, h5, h6, figure
-{ margin: 0; padding: 0; }
-html, body, .page { width: 100%; height: 100%; overflow: hidden; background-color: var(--back-main); }
-
 .w100 { width: 100%; }
 .h100 { height: 100%; }
 
 .bsbb { box-sizing: border-box; }
 
 .df { display: flex; }
+.dib { display: inline-block; }
 .dif { display: inline-flex; }
 .dt { display: table; }
 .dtc { display: table-cell; }
 
 .tac { text-align: center; }
+.vam { vertical-align: middle; }
 
 .pf { position: fixed; }
 .pa { position: absolute; }
@@ -25,3 +21,16 @@ html, body, .page { width: 100%; height: 100%; overflow: hidden; background-colo
 .b0 { bottom: 0; }
 
 .ofh { overflow: hidden; }
+
+
+
+.z1 { z-index: 1; }
+.z2	{ z-index: 2; }
+.z3 { z-index: 3; }
+.z-m { z-index: 99; }
+
+.bg-white { background-color: #ffffff; }
+.bg-semi { background-color: rgba(0, 0, 0, .5); }
+.bg-black { background-color: #000000; }
+
+.vc:after { display: inline-block; content: ''; vertical-align: middle; height: 100%; }

@@ -1,7 +1,7 @@
-import common from './css/common.css';
+import common from './css/style.css';
 import vue from 'vue';
 import underscore from 'underscore';
-import babelPolyfill from 'babel-polyfill';
+import shim from 'core-js/shim';
 
 let win = window,
 	doc = document,
