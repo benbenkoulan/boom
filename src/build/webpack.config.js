@@ -88,7 +88,7 @@ module.exports = {
 		alias: {
 			util: path.resolve('./util'),
 			img: path.resolve('./img'),
-			com: path.resolve('./page/com'),
+			com: path.resolve('./com'),
 		},
 		extensions: ['.js', '.css', '.vue']
 	},

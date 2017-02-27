@@ -10,7 +10,7 @@
 </template>
 <script>
 	import { local } from 'util/storage';
-	import state from '../../state';
+	import state from '../state';
 	console.log(state);
 	export default {
 		props: {
@@ -34,15 +34,15 @@
 	}
 </script>
 <style scoped>
-	@import '../../css/vars.css';
+	@import '../css/vars.css';
 	footer { height: 50px; border-top: 1px solid var(--border-main); border-bottom: 1px solid var(--border-main); }
 	footer a { padding-top: 26px; background-repeat: no-repeat; background-size: 20px; background-position: center 4px; width: 0.1%; }
-	.nav-home { background-image: url(../../img/home.svg); }
-	.nav-car { background-image: url(../../img/car.svg); }
-	.nav-account { background-image: url(../../img/account.svg); }
-	.nav-home-active { background-image: url(../../img/home-active.svg); color: #f84d4d; }
-	.nav-car-active { background-image: url(../../img/car-active.svg); color: #f84d4d; }
-	.nav-account-active { background-image: url(../../img/account-active.svg); color: #f84d4d; }
+	.nav-home { background-image: url(../img/home.svg); }
+	.nav-car { background-image: url(../img/car.svg); }
+	.nav-account { background-image: url(../img/account.svg); }
+	.nav-home-active { background-image: url(../img/home-active.svg); color: #f84d4d; }
+	.nav-car-active { background-image: url(../img/car-active.svg); color: #f84d4d; }
+	.nav-account-active { background-image: url(../img/account-active.svg); color: #f84d4d; }
 
 	.count { top: 0; left: 50%; margin-left: 5px; width: 15px; height: 15px; line-height: 15px; font-size: 12px; background: #f84d4d; border-radius: 15px; }
 </style>
