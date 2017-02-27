@@ -1,6 +1,7 @@
 <template>
 	<div class="page">
 		<div @click="showAlert = true">{{text}}</div>
+		<button @click="addCart" >添加购物车</button>
 		<alert :show="showAlert" @ok="showAlert = false">
 			<p>哈哈哈哈</p>
 		</alert>
@@ -10,6 +11,7 @@
 <script>
 	import footerNav from 'com/footerNav';
 	import alert from 'com/alert';
+	import state from '../../state';
 	export default {
 		data() {
 			return {
@@ -26,7 +28,10 @@
 			}
 		},
 		methods: {
-			/*getData(){
+			addCart(){
+				state.dispatch('increment', 3);
+			}
+			/*,getData(){
 				console.log('-----getData---------');
 				return new Promise((resovle, reject) => {
 					setTimeout(() => {

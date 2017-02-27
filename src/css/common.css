@@ -32,5 +32,10 @@
 .bg-white { background-color: #ffffff; }
 .bg-semi { background-color: rgba(0, 0, 0, .5); }
 .bg-black { background-color: #000000; }
+.bg-inherit { background-color: inherit; }
+
+.c-white { color: #ffffff; }
+.c-black { color: #000000; }
+.c-inherit { color: inherit; }
 
 .vc:after { display: inline-block; content: ''; vertical-align: middle; height: 100%; }

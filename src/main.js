@@ -10,11 +10,24 @@ let win = window,
 	vm;
 doc.addEventListener('click', e => {
 	let target = e.target;
-	if(target.nodeName.toUpperCase() === 'A'){
+	let a = getA(target);
+	if(a){
 		e.preventDefault();
-		route(target.getAttribute('href'));
+		route(a.getAttribute('href'));
 	}
 });
+
+let getA = (target => {
+	let nodeName = target.nodeName.toUpperCase();
+	if(nodeName !== 'BODY'){
+		if(nodeName === 'A'){
+			return target;
+		} else {
+			return getA(target.parentNode)
+		}
+	}
+	return null;
+})
 
 win.addEventListener('popstate', () => {
 	route();
