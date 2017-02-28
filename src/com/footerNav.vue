@@ -1,17 +1,15 @@
 <template>
 	<footer class="pf l0 b0 dt w100 tac">
-		<a class="dtc bsbb" :href="[index == 1 ? null : '/']" :class="[index == 1 ? 'nav-home-active' : 'nav-home']">{{title}}</a>
-		<a class="pr dtc bsbb" :href="[index == 2 ? null : '/car.htm']" :class="[index == 2 ? 'nav-car-active' : 'nav-car']">
+		<a class="dtc bsbb" :href="[index == 1 ? null : '/?g=5']" :class="[index == 1 ? 'nav-home-active' : 'nav-home']">{{title}}</a>
+		<a class="pr dtc bsbb" :href="[index == 2 ? null : '/car.htm?g=5']" :class="[index == 2 ? 'nav-car-active' : 'nav-car']">
 			<span class="c-inherit">购物车</span>
 			<div v-show="count" class="pa c-white count">{{count}}</div>
 		</a>
-		<a class="dtc bsbb" :href="[index == 3 ? null : '/account.htm']" :class="[index == 3 ? 'nav-account-active' : 'nav-account']">我的</a>
+		<a class="dtc bsbb" :href="[index == 3 ? null : '/account.htm?g=5']" :class="[index == 3 ? 'nav-account-active' : 'nav-account']">我的</a>
 	</footer>
 </template>
 <script>
 	import { local } from 'util/storage';
-	import state from '../state';
-	console.log(state);
 	export default {
 		props: {
 			index: {
@@ -28,7 +26,7 @@
 		},
 		computed: {
 			count() {
-				return state.getters.countValue;
+				return this.$root.$store.getters.productsCount;
 			}
 		}
 	}

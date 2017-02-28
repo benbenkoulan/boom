@@ -6,6 +6,19 @@
 <script>
 	import footerNav from 'com/footerNav';
 	export default {
-		components: { footerNav }
+		data (){
+			return {
+			}
+		},
+		components: { footerNav },
+		methods: {
+			lose (){
+
+			}
+		}
 	}
 </script>
+<style scoped>
+	.form { margin-top: 50px; }
+	.form div { padding: 10px; }
+</style>

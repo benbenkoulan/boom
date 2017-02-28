@@ -1,7 +1,7 @@
 <template>
 	<div class="page">
-		<div @click="showAlert = true">{{text}}</div>
-		<button @click="addCart" >添加购物车</button>
+		<button @click="showAlert = true">弹出框</button>
+		<button @click="addToCart" >添加购物车</button>
 		<alert :show="showAlert" @ok="showAlert = false">
 			<p>哈哈哈哈</p>
 		</alert>
@@ -11,7 +11,6 @@
 <script>
 	import footerNav from 'com/footerNav';
 	import alert from 'com/alert';
-	import state from '../../state';
 	export default {
 		data() {
 			return {
@@ -20,29 +19,27 @@
 		},
 		components: { footerNav, alert },
 		mounted (){
-			
-		},
-		computed: {
-			text(){
-				return typeof Promise + '-----------' + Array.prototype.includes;
-			}
 		},
 		methods: {
-			addCart(){
-				state.dispatch('increment', 3);
+			addToCart (){
+				this.$store.dispatch('addToCart', { itemID: '2', count: 3 });
+			},
+			getData (){
+				return ajax.request({
+					url: '/json/products.json',
+					data: {}
+				}).then(response => {
+					console.log('-----------------');
+					console.log(response);
+					return response;
+				}).catch(error => {
+					console.log('==================');
+					console.log(error);
+					return error;
+				})
 			}
-			/*,getData(){
-				console.log('-----getData---------');
-				return new Promise((resovle, reject) => {
-					setTimeout(() => {
-						resovle();
-					}, 2000);
-				});
-			}*/
 		}
 	}
 </script>
 <style scoped>
-	img { max-width: 100% }
-	.test-select select { -webkit-appearance: none; padding: 15px 0 15px; border: 0; outline: none; width: 100px; color: #4d4b47; }
 </style> 

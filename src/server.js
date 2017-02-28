@@ -35,6 +35,12 @@ app.get(/.(html?)$/, (req, res) => {
 	res.send(html);
 });
 
+app.get(/.json$/, (req, res) => {
+	res.type('.html');
+	console.log(req.path);
+	res.send('rtetataew');
+});
+
 app.get('', (req, res) => {
 	res.type('.html');
 	res.send(html);

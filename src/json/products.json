@@ -1,0 +1,22 @@
+{
+	"resultcode": "000",
+	"resultmsg": "msg",
+	"data":[
+		{
+			"id": "1",
+			"name": "test",
+			"items": [
+				{
+					"itemID": "11",
+					"unit": "打"
+				},{
+					"itemID": "12",
+					"unit": "包"
+				},{
+					"itemID": "13",
+					"unit": "袋"
+				}
+			]
+		}
+	]
+}

@@ -7,12 +7,11 @@
 </template>
 <script>
 	import footerNav from 'com/footerNav';
-	import state from '../../state';
 	export default {
 		components: { footerNav },
 		methods: {
 			clearCart (){
-				state.dispatch('clear');
+				this.$store.dispatch('clearCart');
 			}
 		}
 	}
