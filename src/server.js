@@ -8,7 +8,7 @@ const fs = require('fs');
 const isDev = (process.env.NODE_ENV === 'development');
 
 let app = new express();
-app.use(compression());
+app.use(compression());//采用gzip压缩，也可以通过nginx压缩
 let compiler = webpack(config);
 let html = '';
 if(isDev){//开发环境使用webpack-dev-server

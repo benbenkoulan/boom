@@ -1,7 +1,6 @@
 const path = require('path');
 const fs = require('fs');
 
-
 let jsonDirPath = path.resolve('./json');
 let jsons = fs.readdirSync(jsonDirPath);
 let jsonObjs = jsons.map(json => {
