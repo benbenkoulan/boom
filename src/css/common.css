@@ -22,7 +22,7 @@
 
 .ofh { overflow: hidden; }
 
-
+.circle { border-radius: 100%; }
 
 .z1 { z-index: 1; }
 .z2	{ z-index: 2; }

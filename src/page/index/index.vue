@@ -1,30 +1,36 @@
 <template>
 	<div class="page">
-		<button @click="showAlert = true">弹出框</button>
-		<button @click="showTip = true">弹出提示</button>
-		<button @click="addToCart" >添加购物车</button>
+		<div class="tac">
+			<button @click="showAlert = true">弹出框</button>
+			<button @click="showTip = true">弹出提示</button>
+			<button @click="showLoading = true">弹出loading</button>
+			<button @click="addToCart" >添加购物车</button>
+		</div>
 		<alert :show="showAlert" @ok="showAlert = false">
 			<p>哈哈哈哈</p>
 		</alert>
 		<tip :show="showTip" @appeared="showTip = false">
 			<p>{{tipMsg}}</p>
 		</tip>
+		<loading :show="showLoading"></loading>
 		<footer-nav></footer-nav>
 	</div>
 </template>
 <script>
 	import footerNav from 'com/footerNav';
+	import loading from 'com/loading';
 	import alert from 'com/alert';
 	import tip from 'com/tip';
 	export default {
 		data() {
 			return {
+				showLoading: false,
 				showAlert: false,
 				showTip: false,
 				tipMsg: '提示',
 			}
 		},
-		components: { footerNav, alert, tip },
+		components: { footerNav, alert, loading, tip },
 		mounted (){
 		},
 		methods: {

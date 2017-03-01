@@ -9,8 +9,8 @@
     "build-dev": "cross-env NODE_ENV=development webpack --config build/webpack.config.js --progress --hide-modules",
     "pro": "cross-env NODE_ENV=production node server",
     "dev": "cross-env NODE_ENV=development node server",
-    "init": "node init && npm run build",
-    "start-dev": "npm run build-dev && node init && npm run dev",
+    "init": "npm run build && node init",
+    "start-dev": "npm run build-dev && npm run dev",
     "start": "npm run build && node init && npm run pro"
   },
   "author": "liben",
