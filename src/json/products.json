@@ -4,17 +4,28 @@
 	"data":[
 		{
 			"id": "1",
-			"name": "test",
+			"name": "提拉米苏",
 			"items": [
 				{
 					"itemID": "11",
-					"unit": "打"
+					"unit": "打",
+					"price": 12
 				},{
 					"itemID": "12",
-					"unit": "包"
+					"unit": "包",
+					"price": 6
 				},{
 					"itemID": "13",
-					"unit": "袋"
+					"unit": "个",
+					"price": 2
+				},{
+					"itemID": "14",
+					"unit": "盒",
+					"price": 10
+				},{
+					"itemID": "16",
+					"unit": "箱",
+					"price": 60
 				}
 			]
 		}

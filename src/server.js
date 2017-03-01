@@ -1,4 +1,5 @@
 const express = require('express');
+const compression = require('compression');
 const webpack = require('webpack');
 const config = require('./build/webpack.config');
 const path = require('path');
@@ -7,6 +8,7 @@ const fs = require('fs');
 const isDev = (process.env.NODE_ENV === 'development');
 
 let app = new express();
+app.use(compression());
 let compiler = webpack(config);
 let html = '';
 if(isDev){//开发环境使用webpack-dev-server
@@ -37,8 +39,14 @@ app.get(/.(html?)$/, (req, res) => {
 
 app.get(/.json$/, (req, res) => {
 	res.type('.html');
-	console.log(req.path);
-	res.send('rtetataew');
+	let basePath = isDev ? './' : '../dist';
+	basePath = path.resolve(basePath);
+	let filePath = path.join(basePath, req.path);
+	if(fs.existsSync(filePath)){
+		res.send(fs.readFileSync(filePath));	
+	} else {
+		res.send('not found');
+	}
 });
 
 app.get('', (req, res) => {

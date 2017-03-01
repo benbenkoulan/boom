@@ -22,7 +22,7 @@
 		},
 		methods: {
 			addToCart (){
-				this.$store.dispatch('addToCart', { itemID: '2', count: 3 });
+				this.$store.dispatch('addToCart', { itemID: '3', count: 3 });
 			},
 			getData (){
 				return ajax.request({
@@ -30,8 +30,8 @@
 					data: {}
 				}).then(response => {
 					console.log('-----------------');
-					console.log(response);
-					return response;
+					let data = response.data || {};
+					return data;
 				}).catch(error => {
 					console.log('==================');
 					console.log(error);
