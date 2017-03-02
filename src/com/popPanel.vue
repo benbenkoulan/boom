@@ -37,10 +37,10 @@
 </script>
 <style scoped>
 	.layer { transition: opacity .3s ease; }
-	.fade-enter-active, .fade-leave-active {
+	.fade-enter, .fade-leave-active {
 		opacity: 0;
 	}
-	.fade-enter .panel, .fade-enter-to .panel {
+	.fade-enter .panel, .fade-leave-active .panel {
 		transform: scale(0);
 	}
 	.panel { transition: transform .3s ease; border: 1px solid #cccccc; border-radius: 4px; }

@@ -4,7 +4,7 @@
 			<div class="bsbb dib pr circle spin">
                 <div class="bsbb pa circle clip"></div>
             </div>
-            <p>载入中，请稍候~~</p>
+            <p>{{msg}}</p>
 		</div>
 	</pop-panel>
 </template>
@@ -16,6 +16,10 @@
 			show: {
 				type: Boolean,
 				default: false
+			},
+			msg: {
+				type: String,
+				default: '载入中，请稍候~~'
 			}
 		}
 	}
@@ -25,7 +29,7 @@
 		from { transform: rotate(0) }
 		to { transform: rotate(360deg) }
 	}
-	.loading { border-radius: 4px; padding: 15px 20px; }
+	.loading { border-radius: 4px; padding: 20px; }
 	.shadow { padding: 20px; max-width: 240px; }
     .circle { width: 36px; height: 36px; border: 4px solid #ffffff; }
 	.spin { margin-bottom: 10px; animation: spin 1s infinite linear; }

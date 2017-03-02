@@ -41,15 +41,17 @@
 				})
 			},
 			getData (){
+				this.showLoading = true;
 				return ajax.request({
 					url: '/json/products.json',
 					data: {}
 				}).then(response => {
 					let resData = response.data || {};
 					if(resData.resultcode == 0){
-						console.log('-----------------');
-						console.log(resData.data)
 					}
+					setTimeout(() => {
+						this.showLoading = false;
+					}, 2000);
 					return resData.data;
 				}).catch(error => {
 					console.log('==================');
