@@ -10,6 +10,7 @@ let win = window,
 	loc = win.location,
 	vm;
 win.ajax = ajax;
+win.vue = vue;
 doc.addEventListener('click', e => {
 	let target = e.target;
 	let a = getA(target);
@@ -26,7 +27,7 @@ let getA = (target => {
 		if(nodeName === 'A'){
 			return target;
 		} else {
-			return getA(target.parentNode)
+			return !target.parentNode && getA(target.parentNode)
 		}
 	}
 	return null;

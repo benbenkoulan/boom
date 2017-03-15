@@ -1,7 +1,8 @@
 <template>
 	<div class="page">
 		<div class="tac">我的账户</div>
-		<button @click="clearCart">清空购物车</button>
+		<button @click="clearCart">清空购物车</button><br/>
+		<a href="/notepad.htm">记事本</a>
 		<footer-nav :index="3"></footer-nav>
 		<tip :show="showTip" @appeared="showTip = false">{{tipMsg}}</tip>
 	</div>
@@ -27,3 +28,6 @@
 		}
 	}
 </script>
+<style scoped>
+	a { text-decoration: underline; color: blue; }
+</style>

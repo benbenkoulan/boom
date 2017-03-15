@@ -8,6 +8,7 @@
 .dif { display: inline-flex; }
 .dt { display: table; }
 .dtc { display: table-cell; }
+.db { display: block; }
 
 .tac { text-align: center; }
 .vam { vertical-align: middle; }
@@ -40,3 +41,7 @@
 .c-inherit { color: inherit; }
 
 .vc:after { display: inline-block; content: ''; vertical-align: middle; height: 100%; }
+
+.cfx:after { display: block; content: ''; clear: both; visibility: hidden; }
+.fl { float: left; }
+.fr { float: right; }

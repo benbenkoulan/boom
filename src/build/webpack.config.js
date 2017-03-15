@@ -39,8 +39,7 @@ if(isDev){
 
 module.exports = {
 	entry: {
-		main: main,
-		vender: vender
+		main, vender
 	},
 	output: {
 		publicPath: '/',
@@ -48,7 +47,7 @@ module.exports = {
 		filename: `js/[${isDev ? hash : chunkhash}:8].[name].js`,	//热模块替换不支持chunkhash(每次文件变化才会变)，开发时使用hash(每次编译都会变化)
 		chunkFilename: 'js/module/[chunkhash:8].js'
 	},
-	plugins: plugins,
+	plugins,
 	module: {
 		rules: [
 			{

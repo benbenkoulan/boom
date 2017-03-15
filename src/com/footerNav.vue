@@ -9,7 +9,6 @@
 	</footer>
 </template>
 <script>
-	import { local } from 'util/storage';
 	export default {
 		props: {
 			index: {

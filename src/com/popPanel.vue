@@ -43,5 +43,5 @@
 	.fade-enter .panel, .fade-leave-active .panel {
 		transform: scale(0);
 	}
-	.panel { transition: transform .3s ease; border: 1px solid #cccccc; border-radius: 4px; }
+	.panel { transition: transform .3s ease; border-radius: 4px; }
 </style>
