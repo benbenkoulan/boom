@@ -1,8 +1,8 @@
 <template>
 	<div class="page">
-		<div class="form">
+		<div class="tac form">
 			<input type="text" v-model="newEvent">
-			<button @click="addEvent">提交</button>
+			<button class="c-white" @click="addEvent">提交</button>
 		</div>
 		<div class="events">
 			<ul>
@@ -39,6 +39,7 @@
 		},
 		methods: {
 			addEvent(){
+				if(!this.newEvent) return '';
 				this.$store.dispatch('add', {
 					title: this.newEvent,
 					time: new Date(),
@@ -65,13 +66,13 @@
 	}
 </script>
 <style>
-	.form { line-height: 50px; }
-	.form input { padding: 5px; border: 1px solid green; border-radius: 4px; outline: none; }
-	.form button { padding: 6px 20px; background: lightgreen; color: #ffffff; border: none; border-radius: 4px; }
+	.form { line-height: 1rem; }
+	.form input { padding: 0.1rem; width: 3rem; border: 1px solid green; border-radius: 0.1rem; outline: none; }
+	.form button { padding: 0.1rem 0.3rem; background: lightgreen; border: none; border-radius: 0.1rem; }
 	
-	.events { padding: 10px; }
-	.events ul { margin-bottom: 2px; }
-	.events ul li:first-of-type{ padding: 10px; background: lightgreen; color: #ffffff; }
+	.events { padding: 0.2rem; }
+	.events ul { margin-bottom: 2px; font-size: 0.5rem; }
+	.events ul li:first-of-type{ padding: 0.2rem; background: lightgreen; color: #ffffff; }
 
 	.events ul li:not(li:last-child) { border-bottom: 1px solid #cccccc; }
 </style>

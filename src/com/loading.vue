@@ -29,9 +29,9 @@
 		from { transform: rotate(0) }
 		to { transform: rotate(360deg) }
 	}
-	.loading { border-radius: 4px; padding: 20px; }
-	.shadow { padding: 20px; max-width: 240px; }
-    .circle { width: 36px; height: 36px; border: 4px solid #ffffff; }
-	.spin { margin-bottom: 10px; animation: spin 1s infinite linear; }
-	.clip { top: -4px; left: -4px; color: #fcb56e; border-color: #fcb56e; clip: rect(0 24px 6px 12px); }
+	.loading { border-radius: 0.1rem; padding: 0.5rem; }
+	.shadow { padding: 0.5rem; max-width: 4rem; }
+    .circle { width: 1rem; height: 1rem; border: 0.1rem solid #ffffff; }
+	.spin { margin-bottom: 0.2rem; animation: spin 1s infinite linear; }
+	.clip { top: -0.1rem; left: -0.1rem; color: #fcb56e; border-color: #fcb56e; clip: rect(0 0.5rem 0.2rem 0); }
 </style>

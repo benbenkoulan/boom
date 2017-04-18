@@ -1,5 +1,11 @@
 <template>
 	<div class="page">
+		<top :title="'首页'"></top>
+		<div class="notice-board">
+			<div class="marquee-board">
+				<p class="marquee dib notice">这是公告,这是公告,这是公告,这是公告,这是公告</p>
+			</div>
+		</div>
 		<div class="tac">
 			<button @click="showAlert = true">弹出框</button>
 			<button @click="showTip = true">弹出提示</button>
@@ -17,10 +23,12 @@
 	</div>
 </template>
 <script>
-	import footerNav from 'com/footerNav';
+	import top from '../com/top';
+	import footerNav from '../com/footerNav';
 	import loading from 'com/loading';
 	import alert from 'com/alert';
 	import tip from 'com/tip';
+
 	export default {
 		data() {
 			return {
@@ -30,7 +38,7 @@
 				tipMsg: '提示',
 			}
 		},
-		components: { footerNav, alert, loading, tip },
+		components: { alert, loading, tip, top, footerNav },
 		mounted (){
 		},
 		methods: {
@@ -63,4 +71,26 @@
 	}
 </script>
 <style scoped>
+	.page { padding-top: 1rem; }
+
+	@keyframes marquee-board {
+		from { transform: translate3d(100%, 0 , 0); }
+		to { transform: translate3d(0, 0 , 0); }
+	}
+
+	@keyframes marquee {
+		from { transform: translate3d(0, 0, 0); }
+		to { transform: translate3d(-100%, 0, 0); }
+	}
+
+	.marquee-board {
+		animation: marquee-board linear 6s infinite;
+	}
+	.marquee {
+		animation: marquee linear 6s infinite;
+	}
+
+	.notice { white-space: nowrap; }
+
+	button { width: 2rem; height: 1rem; font-size: 0.3rem; }
 </style> 

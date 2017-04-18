@@ -1,33 +1,23 @@
 <template>
-	<div class="page">
-		<div class="tac">我的账户</div>
-		<button @click="clearCart">清空购物车</button><br/>
-		<a href="/notepad.htm">记事本</a>
+	<div class="df page">
+		<top :title="'我的'"></top>
+		<a class="dib notepad2" href="/notepad.htm">记事本2</a>
+		<a class="dib notepad3" href="/notepad.htm">记事本3</a>
+		<a class="dib notepad1" href="/notepad.htm">记事本1</a>
 		<footer-nav :index="3"></footer-nav>
-		<tip :show="showTip" @appeared="showTip = false">{{tipMsg}}</tip>
 	</div>
 </template>
 <script>
-	import footerNav from 'com/footerNav';
-	import tip from 'com/tip';
+	import top from '../com/top';
+	import footerNav from '../com/footerNav';
 	export default {
-		data (){
-			return {
-				showTip: false,
-				tipMsg: ''
-			}
-		},
-		components: { footerNav, tip },
-		methods: {
-			clearCart (){
-				this.$store.dispatch('clearCart').then(() => {
-					this.tipMsg = '购物车已清空';
-					this.showTip = true;
-				});
-			}
-		}
+		components: { top, footerNav }
 	}
 </script>
 <style scoped>
-	a { text-decoration: underline; color: blue; }
+	.page { justify-content: center; align-items: center; flex-direction: row; }
+	a { margin: 0.5rem; padding: 0.5rem 0.2rem 0 0.2rem; border: 1px solid #cccccc; background: url(../../img/notepad.svg) no-repeat; background-size: 0.5rem; background-position: center top; }
+	.notepad2 { order: 2; }
+	.notepad3 { order: 3; }
+	.notepad1 { order: 1; }
 </style>

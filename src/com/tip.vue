@@ -18,5 +18,5 @@
 	}
 </script>
 <style scoped>
-	.tip { padding: 20px; width: 120px; border-radius: 4px; }
+	.tip { padding: 0.4rem; width: 3rem; border-radius: 0.1rem; }
 </style>

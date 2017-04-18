@@ -6,3 +6,7 @@ html, body, div, p, pre, ul, dl, header, footer, main, form, article, h1, h2, h3
 html, body, .page { width: 100%; height: 100%; overflow: hidden; background-color: var(--back-main); }
 
 a { color: var(--color-main); text-decoration: none; }
+
+body *{
+	font-size: 0.5rem;
+}

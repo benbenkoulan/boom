@@ -2,8 +2,23 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="viewport" content="width=device-width"> 
 	<title>Boom</title>
+	<script>
+		var dpr, fontSize, scale;
+		var docEl = document.documentElement;
+		var styleEl = document.createElement('style');
+		var metaEl = document.querySelector('meta[name="viewport"]');
+		dpr = window.devicePixelRatio || 1;
+		console.log(docEl.clientWidth);
+		fontSize = docEl.clientWidth * dpr / 10;
+		scale = 1 / dpr;
+
+		metaEl.setAttribute('content', 'width=' + dpr * docEl.clientWidth + ', initial-scale=' + scale + ',user-scalable=no');
+		docEl.setAttribute('data-dpr', dpr);
+		docEl.firstElementChild.appendChild(styleEl);
+		styleEl.innerHTML = 'html { font-size: ' + fontSize + 'px }';
+	</script>
 </head>
 <body>
 	<%=htmlWebpackPlugin.files.webpackManifest%>

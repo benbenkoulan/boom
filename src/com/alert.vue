@@ -21,6 +21,6 @@
 	}
 </script>
 <style scoped>
-	.tip { padding: 10px; width: 200px; }
-	.ok { padding: 10px; border-top: 1px solid #cccccc; }
+	.tip { padding: 0.3rem; width: 4rem; }
+	.ok { padding: 0.3rem; border-top: 1px solid #cccccc; }
 </style>
