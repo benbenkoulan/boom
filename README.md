@@ -1,5 +1,5 @@
 # boom
-基于vue + webpack + express 实现的单页web应用，支持热模块替换，路由系统没有采用vue官方，而是根据history API等简单实现。
+基于vue + vueRouter + webpack + express 实现的单页web应用，支持热模块替换，路由系统采用vue官方以及根据history API自实现路由机制。
 
 command:<br>npm install<br>
 dev : npm run build-dev<br>
