@@ -30,11 +30,11 @@ if(isDev){
 	main.push(hotMiddlewareScript);
 	vender.push(hotMiddlewareScript);
 } else {
-	plugins.push(new webpack.optimize.UglifyJsPlugin({
+	/*plugins.push(new webpack.optimize.UglifyJsPlugin({
 		compress: {
 		  warnings: false
 		}
-	}));
+	}));*/
 }
 
 module.exports = {

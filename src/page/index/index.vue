@@ -12,6 +12,23 @@
 			<button @click="showLoading = true">弹出loading</button>
 			<button @click="addToCart" >添加购物车</button>
 		</div>
+
+		<div v-for="product in products">
+			<span>{{product.name}}</span>
+			<ul>
+				<li v-for="item in product.items">
+					<p>
+						<span>规格</span>
+						<span>{{item.unit}}</span>
+					</p>
+					<p>
+						<span>价格</span>
+						<span>{{item.price}}</span>
+					</p>
+				</li>
+			</ul>
+		</div>
+
 		<alert :show="showAlert" @ok="showAlert = false">
 			<p>哈哈哈哈</p>
 		</alert>
@@ -36,6 +53,7 @@
 				showAlert: false,
 				showTip: false,
 				tipMsg: '提示',
+				products: []
 			}
 		},
 		components: { alert, loading, tip, top, footerNav },
@@ -50,19 +68,17 @@
 			},
 			getData (){
 				this.showLoading = true;
-				return ajax.request({
+				return G.ajax.request({
 					url: '/json/products.json',
 					data: {}
 				}).then(response => {
 					let resData = response.data || {};
 					if(resData.resultcode == 0){
+						this.products = resData.data || [];
 					}
-					setTimeout(() => {
-						this.showLoading = false;
-					}, 2000);
-					return resData.data;
+					this.showLoading = false;
+					return { products: resData.data, showLoading: false };
 				}).catch(error => {
-					console.log('==================');
 					console.log(error);
 					return error;
 				})

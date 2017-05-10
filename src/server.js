@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const config = require('./build/webpack.config');
 const path = require('path');
 const fs = require('fs');
+const serialize = require('node-serialize');
 
 const isDev = (process.env.NODE_ENV === 'development');
 
@@ -32,9 +33,39 @@ if(isDev){//开发环境使用webpack-dev-server
 	app.use('/js', express.static(path.join(distPath, 'js')));
 }
 
-app.get(/.(html?)$/, (req, res) => {
+// app.get(/.(html?)$/, (req, res) => {
+// 	res.type('.html');
+// 	res.send(html);
+// });
+	
+const createApp = require('../dist/js/server-bundle').default;
+
+const render = require('vue-server-renderer').createRenderer({
+	template: html
+});
+app.get(/[^json]$/, (req, res) => {
 	res.type('.html');
-	res.send(html);
+	console.log(req.url);
+	let context = { url: req.url };
+	var app = createApp(context);
+	if(app instanceof Promise){
+		app.then(vm => {
+			render.renderToString(vm, (err, html) => {
+				if(err){
+					console.log('-----------------------');
+					console.log(err);
+					console.log('-----------------------');
+				}
+				res.end(`<script>window.__INITIAL_STATE__=
+					${serialize.serialize(context.initialState)}
+				</script>` + html);
+			})
+		});
+	} else {
+		render.renderToString(app, (err, html) => {
+			res.end(html);
+		})
+	}
 });
 
 app.get(/.json$/, (req, res) => {
@@ -47,11 +78,6 @@ app.get(/.json$/, (req, res) => {
 	} else {
 		res.send('not found');
 	}
-});
-
-app.get('', (req, res) => {
-	res.type('.html');
-	res.send(html);
 });
 
 app.listen(3000, () => {

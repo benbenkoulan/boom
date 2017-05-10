@@ -1,5 +1,5 @@
 import common from './css/style.css';
-import vue from 'vue';
+import Vue from 'vue';
 import store from './store';
 import shim from 'core-js/shim';
 import ajax from 'util/ajax';
@@ -12,13 +12,20 @@ let win = window,
 	loc = win.location,
 	vm;
 win.ajax = ajax;
-win.vue = vue;
+win.Vue = Vue;
+
+win.G = { ajax, Vue };
+
+let firstPage = true;
+
+let initialState = win.__INITIAL_STATE__ || {};
+console.log('---------------');
 doc.addEventListener('click', e => {
 	let target = e.target;
 	let a = getA(target);
 	if(a){
-		//e.preventDefault();
-		//route(a);
+		e.preventDefault();
+		route(a);
 	}
 });
 
@@ -50,14 +57,20 @@ let route = (node => {
 	let url = node.pathname;
 	let query = getQuery(node);
 	if(vm) vm.$destroy();
-	let filePath = url.replace(/^\//, '').replace(/.htm$/, '') || 'index';//首页
+	let filePath = url.replace(/^\//, '').replace(/.(htm|html)$/, '') || 'index';//首页
 	System.import('./page/' + filePath + '/index').then(page => {
 		page.store = store;
 		page.query = query;
 		page.components = page.components || {};
 		page.components.top = top;
 		page.components.footerNav = footerNav;
-		vm = new vue(page);
+		if(firstPage) {
+			Object.assign(page, initialState);
+			vm = new Vue(page);
+			firstPage = false;
+			 return;
+		}
+		vm = new Vue(page);
 		if(vm.getData){
 			let getDataPromise = vm.getData();
 			if(getDataPromise instanceof Promise){
@@ -77,12 +90,12 @@ let route = (node => {
 });
 
 win.addEventListener('popstate', () => {
-	//route();
+	route();
 });
 
-//route();
+route();
 
-import vueRouter from 'vue-router';
+/*import vueRouter from 'vue-router';
 import index from './page/index/index';
 import car from './page/car/index';
 import account from './page/account/index';
@@ -116,4 +129,4 @@ var v = new vue({
 	router,
 	store,
 	render: h => h(App)
-})
+})*/
