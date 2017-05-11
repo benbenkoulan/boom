@@ -36,7 +36,7 @@
     "style-loader": "^0.13.1",
     "stylus-loader": "^2.4.0",
     "url-loader": "^0.5.7",
-    "vue-loader": "^10.3.0",
+    "vue-loader": "^12.0.3",
     "vue-style-loader": "^2.0.0",
     "vue-template-compiler": "^2.1.10",
     "webpack": "^2.2.1",

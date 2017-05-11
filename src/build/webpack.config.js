@@ -24,7 +24,8 @@ let plugins = [new CommonsChunkPlugin({ name: 'vender', minChunks: Infinity }),
 				})
 			];
 let main = ['./main.js'],
-	vender = ['vue', 'vuex', 'core-js/shim'];
+	vender = ['vue', 'core-js/shim'];
+//vender.push('vuex');
 if(isDev){
 	plugins.push.call(plugins, new webpack.HotModuleReplacementPlugin(), new webpack.NoEmitOnErrorsPlugin());//引入热模块替换插件
 	main.push(hotMiddlewareScript);

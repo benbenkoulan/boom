@@ -33,39 +33,43 @@ if(isDev){//开发环境使用webpack-dev-server
 	app.use('/js', express.static(path.join(distPath, 'js')));
 }
 
-// app.get(/.(html?)$/, (req, res) => {
-// 	res.type('.html');
-// 	res.send(html);
-// });
-	
-const createApp = require('../dist/js/server-bundle').default;
+const { createBundleRenderer } = require('vue-server-renderer');
 
-const render = require('vue-server-renderer').createRenderer({
+const bundleRenderer = createBundleRenderer(fs.readFileSync(path.join(path.resolve('../dist/js/'), 'server-bundle.js'), 'utf-8'), {
 	template: html
 });
 app.get(/[^json]$/, (req, res) => {
 	res.type('.html');
-	console.log(req.url);
 	let context = { url: req.url };
-	var app = createApp(context);
+	let stream = bundleRenderer.renderToStream(context);
+	let response = '';
+	stream.once('data', data => {
+
+	});
+
+	stream.on('data', data => {
+		response += data.toString();
+	});
+	stream.on('end', () => {
+		res.end(`<script>window.__INITIAL_STATE__=
+			${serialize.serialize(context.initialState)}
+		</script>` + response);
+	});
+	stream.on('error', error => {
+		console.log('----------------------');
+		console.log(error);
+		console.log('----------------------');
+	})
+	/*var app = createApp(context);
 	if(app instanceof Promise){
 		app.then(vm => {
-			render.renderToString(vm, (err, html) => {
-				if(err){
-					console.log('-----------------------');
-					console.log(err);
-					console.log('-----------------------');
-				}
-				res.end(`<script>window.__INITIAL_STATE__=
-					${serialize.serialize(context.initialState)}
-				</script>` + html);
-			})
+			
 		});
 	} else {
-		render.renderToString(app, (err, html) => {
+		bundleRenderer.renderToString(app, (err, html) => {
 			res.end(html);
 		})
-	}
+	}*/
 });
 
 app.get(/.json$/, (req, res) => {

@@ -19,7 +19,7 @@ win.G = { ajax, Vue };
 let firstPage = true;
 
 let initialState = win.__INITIAL_STATE__ || {};
-console.log('---------------');
+let pageData = initialState.data || {};
 doc.addEventListener('click', e => {
 	let target = e.target;
 	let a = getA(target);
@@ -65,10 +65,11 @@ let route = (node => {
 		page.components.top = top;
 		page.components.footerNav = footerNav;
 		if(firstPage) {
-			Object.assign(page, initialState);
-			vm = new Vue(page);
 			firstPage = false;
-			 return;
+			vm = new Vue(page);
+			Object.assign(vm, pageData);
+			vm.$mount('.page');
+			return;
 		}
 		vm = new Vue(page);
 		if(vm.getData){
