@@ -10,35 +10,16 @@ const isDev = (process.env.NODE_ENV === 'development');
 
 let app = new express();
 app.use(compression());//采用gzip压缩，也可以通过nginx压缩
-let compiler = webpack(config);
-let html = '';
-if(isDev){//开发环境使用webpack-dev-server
-	const devMidlleware = require('webpack-dev-middleware')(compiler, {
-		publicPath: '/'	//和配置文件保持一致
-	});
-	compiler.plugin('done', () => {
-		let fs = devMidlleware.fileSystem;	//读取内存文件
-		let indexPath = path.join(config.output.path, 'index.html');
-		html = fs.readFileSync(indexPath, 'utf-8');
-	});
-	app.use(devMidlleware);
-	app.use(require('webpack-hot-middleware')(compiler));
-} else {//读取磁盘文件
-	let distPath = path.resolve('../dist');
-	let indexPath = path.join(distPath, 'index.html');
-	html = fs.readFileSync(indexPath, 'utf-8');
-	//托管静态资源,不走express
-	app.use('/img', express.static(path.join(distPath, 'img')));
-	app.use('/css', express.static(path.join(distPath, 'css')));
-	app.use('/js', express.static(path.join(distPath, 'js')));
-}
-
+let readyPromise,
+	bundleRenderer,
+	template = fs.readFileSync(path.join(path.resolve('./'), 'index.html'), 'utf-8');
 const { createBundleRenderer } = require('vue-server-renderer');
 
-const bundleRenderer = createBundleRenderer(fs.readFileSync(path.join(path.resolve('../dist/js/'), 'server-bundle.js'), 'utf-8'), {
-	template: html
-});
-app.get(/[^json]$/, (req, res) => {
+const createRenderer = (bundle, options) => {
+	return createBundleRenderer(bundle, Object.assign(options, { template, runInNewContext: false }));
+}
+
+const render = (req, res) => {
 	res.type('.html');
 	let context = { url: req.url };
 	let stream = bundleRenderer.renderToStream(context);
@@ -50,27 +31,45 @@ app.get(/[^json]$/, (req, res) => {
 	stream.on('data', data => {
 		response += data.toString();
 	});
+
 	stream.on('end', () => {
+		console.log(context.initialState);
 		res.end(`<script>window.__INITIAL_STATE__=
 			${serialize.serialize(context.initialState)}
 		</script>` + response);
 	});
+
 	stream.on('error', error => {
 		console.log('----------------------');
 		console.log(error);
 		console.log('----------------------');
-	})
-	/*var app = createApp(context);
-	if(app instanceof Promise){
-		app.then(vm => {
-			
-		});
-	} else {
-		bundleRenderer.renderToString(app, (err, html) => {
-			res.end(html);
-		})
-	}*/
-});
+	});
+}
+
+if(isDev){//开发环境使用webpack-dev-server
+	readyPromise = require('./build/setup-dev-server')(app, (bundle, options) => {
+		console.log('--------test------------');
+		bundleRenderer = createRenderer(bundle, options);
+		console.log('-----------test2-------------');
+	});
+} else {//读取磁盘文件
+	let distPath = path.resolve('../dist');
+	//托管静态资源,不通过express
+	app.use('/img', express.static(path.join(distPath, 'img')));
+	app.use('/css', express.static(path.join(distPath, 'css')));
+	app.use('/js', express.static(path.join(distPath, 'js')));
+
+
+	const bundle = require('../dist/vue-ssr-server-bundle.json');
+	const clientManifest = require('../dist/vue-ssr-client-manifest.json');
+	bundleRenderer = createRenderer(bundle, {
+		clientManifest
+	});
+}
+
+app.get(/[^json]$/, isDev ? readyPromise.then(() => {
+	render(req, res);
+}) : render);
 
 app.get(/.json$/, (req, res) => {
 	res.type('.html');

@@ -14,6 +14,7 @@
 				tipMsg: ''
 			}
 		},
+		title: '购物车',
 		components: { tip },
 		methods: {
 			clearCart (){

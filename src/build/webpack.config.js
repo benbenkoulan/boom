@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 
-var hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';//添加到每个入口文件中
+const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -21,21 +21,18 @@ let plugins = [new CommonsChunkPlugin({ name: 'vender', minChunks: Infinity }),
 				new ExtractTextPlugin('css/style.[contenthash:8].css'),
 				new webpack.DefinePlugin({
 					'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
-				})
+				}),
+				new VueSSRClientPlugin()
 			];
 let main = ['./main.js'],
 	vender = ['vue', 'core-js/shim'];
 //vender.push('vuex');
-if(isDev){
-	plugins.push.call(plugins, new webpack.HotModuleReplacementPlugin(), new webpack.NoEmitOnErrorsPlugin());//引入热模块替换插件
-	main.push(hotMiddlewareScript);
-	vender.push(hotMiddlewareScript);
-} else {
-	/*plugins.push(new webpack.optimize.UglifyJsPlugin({
+if(!isDev){
+	plugins.push(new webpack.optimize.UglifyJsPlugin({
 		compress: {
 		  warnings: false
 		}
-	}));*/
+	}));
 }
 
 module.exports = {

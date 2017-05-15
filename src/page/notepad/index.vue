@@ -28,6 +28,7 @@
 				newEvent: ''
 			}
 		},
+		title: '记事本',
 		components: { event },
 		computed: {
 			events() {

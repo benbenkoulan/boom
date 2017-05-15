@@ -56,6 +56,7 @@
 				products: []
 			}
 		},
+		title: '首页',
 		components: { alert, loading, tip, top, footerNav },
 		mounted (){
 		},

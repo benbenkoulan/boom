@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width"> 
-		<title>Boom</title>
+		<title>{{ title }}</title>
 		<script>
 			var dpr, fontSize, scale;
 			var docEl = document.documentElement;
@@ -20,7 +20,6 @@
 		</script>
 	</head>
 	<body>
-		<%=htmlWebpackPlugin.files.webpackManifest%>
 		<!--vue-ssr-outlet-->
 		<div class="page" data-server-rendered="true"></div>
 	</body>
