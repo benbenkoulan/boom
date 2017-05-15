@@ -33,7 +33,6 @@ const render = (req, res) => {
 	});
 
 	stream.on('end', () => {
-		console.log(context.initialState);
 		res.end(`<script>window.__INITIAL_STATE__=
 			${serialize.serialize(context.initialState)}
 		</script>` + response);
