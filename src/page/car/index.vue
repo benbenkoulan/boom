@@ -1,8 +1,10 @@
 <template>
 	<div class="page">
+		<tip :show="showTip" @appeared="showTip = true">
+			{{tipMsg}}
+		</tip>
 		<button @click="clearCart">清空购物车</button>
 		<footer-nav :index="2"></footer-nav>
-		<tip :show="showTip" @appeared="showTip = false">{{tipMsg}}</tip>
 	</div>
 </template>
 <script>

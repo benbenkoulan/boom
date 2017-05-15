@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 
@@ -12,11 +11,11 @@ const isDev = process.env.NODE_ENV === 'development';
 const chunkhash = 'chunkhash';
 const hash = 'hash';
 
-let plugins = [new CommonsChunkPlugin({ name: 'vender', minChunks: Infinity }),
-				new CommonsChunkPlugin({ name: 'manifest', chunks: ['vendor']}),	//将运行时代码单独打包
-				new HtmlWebpackPlugin({ template: './index.html', 
-					filename: 'index.html', 
-					chunks : ['main', 'vender'] }),
+let plugins = [new CommonsChunkPlugin({ name: 'vender', minChunks: module => {
+					// this assumes your vendor imports exist in the node_modules directory
+                   return module.context && module.context.indexOf('node_modules') !== -1;
+				} }),
+				new CommonsChunkPlugin({ name: 'manifest'}),	//将运行时代码单独打包
 				new InlineManifestWebpackPlugin({ name: 'webpackManifest' }),//将运行时代码内嵌到HTML中，减少请求
 				new ExtractTextPlugin('css/style.[contenthash:8].css'),
 				new webpack.DefinePlugin({
@@ -49,7 +48,7 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
+				test: /\.js$/,	
 				exclude: /node_modules/,
 				loader: 'babel-loader'
 			},
@@ -61,7 +60,8 @@ module.exports = {
 						loader: ExtractTextPlugin.extract({
 			              use: ['css-loader', 'postcss-loader'],
 			              fallback: 'vue-style-loader'
-			            })
+			            }),
+			            preserveWhitespace: false
 					}
 				}]
 			},

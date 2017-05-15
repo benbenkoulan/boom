@@ -9,7 +9,6 @@
 </template>
 <script>
 	import top from '../com/top';
-	import footerNav from '../com/footerNav';
 	export default {
 		components: { top, footerNav },
 		title: '我的账户'

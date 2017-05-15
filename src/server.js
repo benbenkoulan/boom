@@ -33,6 +33,7 @@ const render = (req, res) => {
 	});
 
 	stream.on('end', () => {
+		console.log(response);
 		res.end(`<script>window.__INITIAL_STATE__=
 			${serialize.serialize(context.initialState)}
 		</script>` + response);
@@ -66,9 +67,11 @@ if(isDev){//开发环境使用webpack-dev-server
 	});
 }
 
-app.get(/[^json]$/, isDev ? readyPromise.then(() => {
-	render(req, res);
-}) : render);
+app.get(/[^json]$/, isDev ? (req, res) => {
+	readyPromise.then(() => {
+		render(req, res);
+	});
+} : render);
 
 app.get(/.json$/, (req, res) => {
 	res.type('.html');

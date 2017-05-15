@@ -19,7 +19,7 @@ if(!isDev){
 	}));
 }
 module.exports = {
-  	devtool: 'source-map',
+  	devtool: '#source-map',
 	target: 'node',
     entry: './server-main.js',
 	output: {

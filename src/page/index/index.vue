@@ -28,7 +28,6 @@
 				</li>
 			</ul>
 		</div>
-
 		<alert :show="showAlert" @ok="showAlert = false">
 			<p>哈哈哈哈</p>
 		</alert>
@@ -62,6 +61,7 @@
 		},
 		methods: {
 			addToCart (){
+				console.log(this);
 				this.$store.dispatch('addToCart', { itemID: '3', count: 3 }).then(() => {
 					this.tipMsg = '添加购物车成功';
 					this.showTip = true;

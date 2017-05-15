@@ -15,5 +15,5 @@
 	}
 </script>
 <style scoped>
-	.top { line-height: 1rem; background: #35495e; }
+	.top { height: 1rem; line-height: 1rem; background: #35495e; }
 </style>

@@ -3,17 +3,15 @@ import Vue from 'vue';
 import store from './store';
 import shim from 'core-js/shim';
 import ajax from 'util/ajax';
-import top from './page/com/top';
-import footerNav from './page/com/footerNav';
 
 let win = window,
 	doc = document,
 	body = doc.body,
 	loc = win.location,
 	vm;
+
 win.ajax = ajax;
 win.Vue = Vue;
-
 win.G = { ajax, Vue };
 
 let firstPage = true;
@@ -61,9 +59,6 @@ let route = (node => {
 	System.import('./page/' + filePath + '/index').then(page => {
 		page.store = store;
 		page.query = query;
-		page.components = page.components || {};
-		page.components.top = top;
-		page.components.footerNav = footerNav;
 		if(firstPage) {
 			firstPage = false;
 			vm = new Vue(page);
@@ -93,7 +88,6 @@ let route = (node => {
 win.addEventListener('popstate', () => {
 	route();
 });
-
 route();
 
 /*import vueRouter from 'vue-router';
