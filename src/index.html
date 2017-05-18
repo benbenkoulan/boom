@@ -10,7 +10,6 @@
 			var styleEl = document.createElement('style');
 			var metaEl = document.querySelector('meta[name="viewport"]');
 			dpr = window.devicePixelRatio || 1;
-			console.log(docEl.clientWidth);
 			fontSize = docEl.clientWidth * dpr / 10;
 			scale = 1 / dpr;
 			metaEl.setAttribute('content', 'width=' + dpr * docEl.clientWidth + ', initial-scale=' + scale + ',user-scalable=no');

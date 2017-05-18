@@ -45,7 +45,8 @@ module.exports = {
 						loader: ExtractTextPlugin.extract({
 			              use: ['css-loader', 'postcss-loader'],
 			              fallback: 'vue-style-loader'
-			            })
+			            }),
+			            preserveWhitespace: false
 					}
 				}]
 			},

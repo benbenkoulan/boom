@@ -9,6 +9,7 @@
 </template>
 <script>
 	import tip from 'com/tip';
+	import footerNav from '../com/footerNav';
 	export default {
 		data (){
 			return {
@@ -17,7 +18,7 @@
 			}
 		},
 		title: '购物车',
-		components: { tip },
+		components: { tip, footerNav },
 		methods: {
 			clearCart (){
 				this.$store.dispatch('clearCart').then(() => {

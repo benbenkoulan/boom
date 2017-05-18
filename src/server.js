@@ -33,7 +33,6 @@ const render = (req, res) => {
 	});
 
 	stream.on('end', () => {
-		console.log(response);
 		res.end(`<script>window.__INITIAL_STATE__=
 			${serialize.serialize(context.initialState)}
 		</script>` + response);
@@ -48,9 +47,7 @@ const render = (req, res) => {
 
 if(isDev){//开发环境使用webpack-dev-server
 	readyPromise = require('./build/setup-dev-server')(app, (bundle, options) => {
-		console.log('--------test------------');
 		bundleRenderer = createRenderer(bundle, options);
-		console.log('-----------test2-------------');
 	});
 } else {//读取磁盘文件
 	let distPath = path.resolve('../dist');

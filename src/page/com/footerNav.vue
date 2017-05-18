@@ -7,7 +7,7 @@
 			<div v-show="count" class="pa c-white count">{{count}}</div>
 		</a>
 		<a class="dtc bsbb" :href="[index == 3 ? null : '/account.htm?g=5']" :class="[index == 3 ? 'nav-account-active' : 'nav-account']">我的</a>
-		<!--<router-link class="dtc bsbb" :class="[index == 3 ? 'nav-account-active' : 'nav-account']" :to="{name: 'account', params: { g: 5 }}">我的</router-link> -->
+<!-- 		<router-link class="dtc bsbb" :class="[index == 3 ? 'nav-account-active' : 'nav-account']" :to="{name: 'account', params: { g: 5 }}">我的</router-link> -->
 	</footer>
 </template>
 <script>

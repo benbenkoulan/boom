@@ -1,8 +1,15 @@
 import Vue from 'vue';
 import ajax from './util/ajax';
-
+import mock from './util/mock';
 
 global.G = { ajax, Vue };
+
+Vue.config.errorHandler = (err, vm, info) => {
+	console.log('---------errorHandler---------------start---');
+	console.log(err);
+	console.log(info);
+	console.log('---------errorHandler---------------end-----');
+}
 
 export default context => {
 	var initialState = context.initialState = {};

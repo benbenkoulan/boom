@@ -3,6 +3,7 @@ import Vue from 'vue';
 import store from './store';
 import shim from 'core-js/shim';
 import ajax from 'util/ajax';
+import mock from './util/mock';
 
 let win = window,
 	doc = document,
@@ -89,6 +90,13 @@ win.addEventListener('popstate', () => {
 	route();
 });
 route();
+
+Vue.config.errorHandler = (err, vm, info) => {
+	console.log('---------errorHandler---------------start---');
+	console.log(err);
+	console.log(info);
+	console.log('---------errorHandler---------------end-----');
+}
 
 /*import vueRouter from 'vue-router';
 import index from './page/index/index';

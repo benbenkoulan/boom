@@ -1,0 +1,29 @@
+{
+	"resultcode": "000",
+	"resultmsg": "ok",
+	"data": [{
+		"id": "10001",
+		"cardName": "豆捞坊贵宾卡",
+		"cardBackgroundColor": "#ff0000",
+		"cardForegroundColor": "#ffff00",
+		"cardUseShopRemark": "适用范围: 全部门店"
+	},{
+		"id": "10002",
+		"cardName": "豆捞坊银卡",
+		"cardBackgroundColor": "#ff0000",
+		"cardForegroundColor": "#ffff00",
+		"cardUseShopRemark": "适用范围: 全部门店"
+	},{
+		"id": "10003",
+		"cardName": "豆捞坊金卡",
+		"cardBackgroundColor": "#ff0000",
+		"cardForegroundColor": "#ffff00",
+		"cardUseShopRemark": "适用范围: 部分门店"
+	},{
+		"id": "10004",
+		"cardName": "豆捞坊贵宾卡",
+		"cardBackgroundColor": "#ff0000",
+		"cardForegroundColor": "#ffff00",
+		"cardUseShopRemark": "适用范围: 部分门店"
+	}]
+}

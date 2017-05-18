@@ -14,6 +14,7 @@
     "pro": "cross-env NODE_ENV=production node server",
     "dev": "cross-env NODE_ENV=development node server",
     "init": "npm run build && node init",
+    "init-dev": "npm run build-dev && node init",
     "start-dev": "npm run build-dev && npm run dev",
     "start": "npm run build && npm run pro"
   },
@@ -47,6 +48,7 @@
     "compression": "^1.6.2",
     "core-js": "^2.4.1",
     "express": "^4.14.1",
+    "mockjs": "^1.0.1-beta3",
     "node-serialize": "0.0.4",
     "underscore": "^1.8.3",
     "vue": "^2.3.3",

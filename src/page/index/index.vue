@@ -1,4 +1,4 @@
-<template>
+<template lang="html">
 	<div class="page">
 		<top :title="'首页'"></top>
 		<div class="notice-board">
@@ -12,22 +12,16 @@
 			<button @click="showLoading = true">弹出loading</button>
 			<button @click="addToCart" >添加购物车</button>
 		</div>
-
-		<div v-for="product in products">
+		<div v-for="product in products" :key="product.id">
 			<span>{{product.name}}</span>
 			<ul>
-				<li v-for="item in product.items">
-					<p>
-						<span>规格</span>
-						<span>{{item.unit}}</span>
-					</p>
-					<p>
-						<span>价格</span>
-						<span>{{item.price}}</span>
-					</p>
+				<li class="product" v-for="item in product.items" :key="item.id">
+					<p class="dib"><span>规格</span>:<span>{{item.unit}}</span></p>
+					<p class="dib"><span>价格</span>:<span>{{item.price}}</span></p>
 				</li>
 			</ul>
 		</div>
+		<ul  v-for="card in cards" :key="card.id">{{card.cardName}}</ul>
 		<alert :show="showAlert" @ok="showAlert = false">
 			<p>哈哈哈哈</p>
 		</alert>
@@ -52,7 +46,8 @@
 				showAlert: false,
 				showTip: false,
 				tipMsg: '提示',
-				products: []
+				products: [],
+				cards: []
 			}
 		},
 		title: '首页',
@@ -61,7 +56,6 @@
 		},
 		methods: {
 			addToCart (){
-				console.log(this);
 				this.$store.dispatch('addToCart', { itemID: '3', count: 3 }).then(() => {
 					this.tipMsg = '添加购物车成功';
 					this.showTip = true;
@@ -69,20 +63,33 @@
 			},
 			getData (){
 				this.showLoading = true;
-				return G.ajax.request({
+				let that = this;
+				let cardPromise = G.ajax.request({
+					url: '/json/cards.json',
+					data: {}
+				}).then(data => {
+					if(data.resultcode == 0){
+						that.cards = data.data || [];
+					}
+					return that.cards;
+				});
+				let productPromise = G.ajax.request({
 					url: '/json/products.json',
 					data: {}
-				}).then(response => {
-					let resData = response.data || {};
-					if(resData.resultcode == 0){
-						this.products = resData.data || [];
+				}).then(data => {
+					if(data.resultcode == 0){
+						that.products = data.data || [];
 					}
-					this.showLoading = false;
-					return { products: resData.data, showLoading: false };
-				}).catch(error => {
-					console.log(error);
-					return error;
-				})
+					return that.products;
+				});
+				return Promise.all([productPromise, cardPromise]).then(([products, cards]) => {
+					that.showLoading = false;
+					console.log(cards);
+					return { products, cards, showLoading: false };
+				}).catch(err => {
+					console.log(err);
+					return err;
+				});
 			}
 		}
 	}
@@ -110,4 +117,6 @@
 	.notice { white-space: nowrap; }
 
 	button { width: 2rem; height: 1rem; font-size: 0.3rem; }
+
+	.product p { text-indent: 0.4rem; }
 </style> 

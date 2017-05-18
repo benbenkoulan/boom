@@ -10,7 +10,7 @@ const request = (config => {
 			baseURL: 'http://local.m.hualala.com:3000',
 			params: config.data
 		}).then(response => {
-			resolve(response);
+			resolve(response.data || {});
 		}).catch(error => {
 			reject(error);
 		});
