@@ -1,13 +1,13 @@
-import Axios from 'Axios';
+import Axios from 'axios';
 
-const request = (config => {
+export default config => {
 	/*var axios = Axios.create({
 		baseURL: 'http://local.m.hualala.com:3000/',
 		timeout: 3000
 	});*/
 	return new Promise((resolve, reject) => {
 		Axios.get(config.url, {
-			baseURL: 'http://local.m.hualala.com:3000',
+			baseURL: 'http://dohko.m.hualala.com:3000',
 			params: config.data
 		}).then(response => {
 			resolve(response.data || {});
@@ -15,8 +15,4 @@ const request = (config => {
 			reject(error);
 		});
 	});
-});
-
-export default {
-	request
 }

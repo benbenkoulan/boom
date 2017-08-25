@@ -1,10 +1,9 @@
 const express = require('express');
 const compression = require('compression');
-const webpack = require('webpack');
-const config = require('./build/webpack.config');
 const path = require('path');
 const fs = require('fs');
 const serialize = require('node-serialize');
+const LRU = require('lru-cache')
 
 const isDev = (process.env.NODE_ENV === 'development');
 
@@ -16,7 +15,7 @@ let readyPromise,
 const { createBundleRenderer } = require('vue-server-renderer');
 
 const createRenderer = (bundle, options) => {
-	return createBundleRenderer(bundle, Object.assign(options, { template, runInNewContext: false }));
+	return createBundleRenderer(bundle, Object.assign(options, { template, runInNewContext: false, cache: LRU({ max: 10000, maxAge: 1000 * 60 * 60 }) }));
 }
 
 const render = (req, res) => {

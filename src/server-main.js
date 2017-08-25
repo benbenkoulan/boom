@@ -16,7 +16,7 @@ export default context => {
 	let url = context.url;
 	url = url.split('?')[0]
 	let filePath = url.replace(/^\//, '').replace(/.(htm|html)$/, '') || 'index';//首页
-	let page = require('./page/' + filePath + '/index');
+	let page = require('./page/' + filePath + '/index.vue');
 	context.title = page.title || 'Boom';
 	let vm = new Vue(page);
 	if(vm.getData){

@@ -7,15 +7,15 @@
 		<div class="events">
 			<ul>
 				<li>待办事项</li>
-				<event v-for="(event, index) in events" v-if="event.type === 'todo'" :event="event" @toggle="updateEvent(event, index)" @cancel="cancelEvent(event, index)"></event>
+				<event :key="'todo_' + index" v-for="(event, index) in events" v-if="event.type === 'todo'" :event="event" @toggle="updateEvent(event, index)" @cancel="cancelEvent(event, index)"></event>
 			</ul>
 			<ul>
 				<li>已办事项</li>
-				<event v-for="(event, index) in events" v-if="event.type === 'done'" :event="event" @toggle="updateEvent(event, index)"></event>
+				<event :key="'done_' + index" v-for="(event, index) in events" v-if="event.type === 'done'" :event="event" @toggle="updateEvent(event, index)"></event>
 			</ul>
 			<ul>
 				<li>取消事项</li>
-				<event v-for="(event, index) in events" v-if="event.type === 'cancel'" :event="event" @recover="recoverEvent(event, index)"></event>
+				<event :key="'cancel_' + index" v-for="(event, index) in events" v-if="event.type === 'cancel'" :event="event" @recover="recoverEvent(event, index)"></event>
 			</ul>
 		</div>
 	</div>

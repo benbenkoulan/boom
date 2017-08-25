@@ -1,0 +1,72 @@
+const path = require('path');
+const webpack = require('webpack');
+const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+
+const isProduction = process.env.NODE_ENV === 'production';
+
+
+let plugins = [new webpack.DefinePlugin({
+	'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+})];
+
+if(isProduction) plugins.push(new ExtractTextWebpackPlugin('css/style.[contenthash:8].css'));
+
+if(isProduction) plugins.push(new webpack.optimize.UglifyJsPlugin({	compress: { warnings: false } }));
+
+module.exports = {
+	output: {
+		publicPath: '/',
+		path: path.resolve('../dist'),
+		filename: `js/[${isProduction ? 'chunkhash' : 'hash'}:8].[name].js`,	//热模块替换不支持chunkhash(每次文件变化才会变)，开发时使用hash(每次编译都会变化)
+		chunkFilename: 'js/module/[chunkhash:8].js'
+	},
+	module: {
+		rules: [
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				loader: 'babel-loader'
+			},
+			{
+				test: /\.vue$/,
+				exclude: /node_modules/,
+				use: [{
+					loader: 'vue-loader',
+					options:{
+			            //extractCSS: isProduction,
+			            loaders: isProduction ? ExtractTextWebpackPlugin.extract({
+			            	use: 'css-loader',
+			            	fallback: 'vue-style-loader'
+			            }) : ['vue-style-loader', 'css-loader'],
+			            preserveWhitespace: false
+					}
+				}]
+			},
+			{
+				test: /\.css$/,
+				exclude: /node_modules/,
+		        use: isProduction ? ExtractTextWebpackPlugin.extract({
+		        	use: ['css-loader', 'postcss-loader'],
+		        	fallback: 'vue-style-loader'
+		        }) : ['vue-style-loader', 'css-loader', 'postcss-loader']
+			},
+			{
+				test: /\.jpe?g|png|gif|svg/,
+				exclude: /node_modules/,
+				loader: 'url-loader',
+				options: {
+					limit: 3000
+				}
+			}
+		]
+	},
+	plugins,
+	resolve: {
+		alias: {
+			util: path.resolve('./util'),
+			img: path.resolve('./img'),
+			com: path.resolve('./com')
+		},
+		extensions: ['.js', '.vue', '.css']
+	}
+}

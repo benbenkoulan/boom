@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+message Product {
+	
+	int64 id = 1;
+
+	string name = 2;
+
+	repeated ProductItem items = 3;
+}
+
+message ProductItem {
+	
+	int64 itemID = 1;
+
+	string unit = 2;
+
+	double price = 3;
+}
+
+message queryProductsReq {
+	int64 groupID = 1;
+}
+
+message queryProductsRes {
+
+	repeated Product data = 1;
+}
+
+
+service query {
+	
+	rpc queryProducts(queryProductsReq) returns (queryProductsRes){}
+}

@@ -1,6 +1,6 @@
 <template>
 	<transition name="fade" appear @after-enter="afterEnter">
-		<div v-if="show" @scroll.prevent class="pf l0 t0 w100 h100 tac vc z1 layer" :class="[semi ? 'bg-semi' : '']">
+		<div v-show="show" @scroll.prevent class="pf l0 t0 w100 h100 tac vc z3 layer" :class="[semi ? 'bg-semi' : '']">
 			<div class="dib bsbb bg-white panel"><slot></slot></div>
 		</div>
 	</transition>

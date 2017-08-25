@@ -1,11 +1,11 @@
 <template>
 	<pop-panel :show="show" :semi="false">
-		<div class="bg-semi bsbb c-white loading">
+		<!-- <div class="bg-semi bsbb c-white loading">
 			<div class="bsbb dib pr circle spin">
-                <div class="bsbb pa circle clip"></div>
-            </div>
-            <p>{{msg}}</p>
-		</div>
+		                <p class="bsbb pa circle clip"></p>
+		            </div>
+		            <p>{{msg}}</p>
+		</div> -->
 	</pop-panel>
 </template>
 <script>

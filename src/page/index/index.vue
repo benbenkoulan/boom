@@ -12,16 +12,16 @@
 			<button @click="showLoading = true">弹出loading</button>
 			<button @click="addToCart" >添加购物车</button>
 		</div>
-		<div v-for="product in products" :key="product.id">
+		<product-list></product-list>
+		<!-- <div v-for="product in products" :key="product.id">
 			<span>{{product.name}}</span>
 			<ul>
 				<li class="product" v-for="item in product.items" :key="item.id">
-					<p class="dib"><span>规格</span>:<span>{{item.unit}}</span></p>
-					<p class="dib"><span>价格</span>:<span>{{item.price}}</span></p>
+					<p class="dib"><span>规格:</span><span>{{item.unit}}</span></p>
+					<p class="dib"><span>价格:</span><span>{{item.price}}</span></p>
 				</li>
 			</ul>
-		</div>
-		<ul  v-for="card in cards" :key="card.id">{{card.cardName}}</ul>
+		</div> -->
 		<alert :show="showAlert" @ok="showAlert = false">
 			<p>哈哈哈哈</p>
 		</alert>
@@ -38,6 +38,7 @@
 	import loading from 'com/loading';
 	import alert from 'com/alert';
 	import tip from 'com/tip';
+	import productList from '../com/productList';
 
 	export default {
 		data() {
@@ -51,7 +52,7 @@
 			}
 		},
 		title: '首页',
-		components: { alert, loading, tip, top, footerNav },
+		components: { alert, loading, tip, top, footerNav, productList },
 		mounted (){
 		},
 		methods: {
@@ -64,7 +65,7 @@
 			getData (){
 				this.showLoading = true;
 				let that = this;
-				let cardPromise = G.ajax.request({
+				let cardPromise = G.ajax({
 					url: '/json/cards.json',
 					data: {}
 				}).then(data => {
@@ -73,7 +74,7 @@
 					}
 					return that.cards;
 				});
-				let productPromise = G.ajax.request({
+				let productPromise = G.ajax({
 					url: '/json/products.json',
 					data: {}
 				}).then(data => {
@@ -84,7 +85,6 @@
 				});
 				return Promise.all([productPromise, cardPromise]).then(([products, cards]) => {
 					that.showLoading = false;
-					console.log(cards);
 					return { products, cards, showLoading: false };
 				}).catch(err => {
 					console.log(err);
@@ -95,7 +95,7 @@
 	}
 </script>
 <style scoped>
-	.page { padding-top: 1rem; }
+	.page { padding: 1rem 0; overflow-y: auto; }
 
 	@keyframes marquee-board {
 		from { transform: translate3d(100%, 0 , 0); }

@@ -2,14 +2,14 @@
 1 verbose cli [ 'D:\\nodejs\\node.exe',
 1 verbose cli   'C:\\Users\\Administrator\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js',
 1 verbose cli   'run',
-1 verbose cli   'dev' ]
+1 verbose cli   'start-dev' ]
 2 info using npm@3.10.6
 3 info using node@v6.9.1
 4 verbose stack Error: ENOENT: no such file or directory, open 'E:\developer\boom\package.json'
 4 verbose stack     at Error (native)
 5 verbose cwd E:\developer\boom
 6 error Windows_NT 6.1.7601
-7 error argv "D:\\nodejs\\node.exe" "C:\\Users\\Administrator\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "run" "dev"
+7 error argv "D:\\nodejs\\node.exe" "C:\\Users\\Administrator\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "run" "start-dev"
 8 error node v6.9.1
 9 error npm  v3.10.6
 10 error path E:\developer\boom\package.json
