@@ -55,7 +55,6 @@
     "mockjs": "^1.0.1-beta3",
     "node-serialize": "0.0.4",
     "underscore": "^1.8.3",
-    "vue": "^2.4.1",
     "vue-router": "^2.4.0",
     "vue-server-renderer": "^2.4.1",
     "vue-template-compiler": "^2.4.1",

@@ -16,7 +16,7 @@ if(isProduction) plugins.push(new webpack.optimize.UglifyJsPlugin({	compress: { 
 module.exports = {
 	output: {
 		publicPath: '/',
-		path: path.resolve('../dist'),
+		path: path.resolve('./dist'),
 		filename: `js/[${isProduction ? 'chunkhash' : 'hash'}:8].[name].js`,	//热模块替换不支持chunkhash(每次文件变化才会变)，开发时使用hash(每次编译都会变化)
 		chunkFilename: 'js/module/[chunkhash:8].js'
 	},
@@ -64,8 +64,8 @@ module.exports = {
 			util: path.resolve('./src/util'),
 			img: path.resolve('./src/img'),
 			com: path.resolve('./src/com'),
-			css: path.resolve('./src/css')
-
+			css: path.resolve('./src/css'),
+			vue$: path.resolve('./lib/vue.runtime.esm')
 		},
 		extensions: ['.js', '.vue', '.css']
 	}
