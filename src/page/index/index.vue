@@ -53,7 +53,14 @@
 		},
 		title: '首页',
 		components: { alert, loading, tip, top, footerNav, productList },
+		beforeCreate (){
+			console.log('------beforeCreate-----------');
+		},
+		created (){
+			console.log('--------created--------------');
+		},
 		mounted (){
+			console.log('----mounted-------');
 		},
 		methods: {
 			addToCart (){

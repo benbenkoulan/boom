@@ -30,23 +30,21 @@ module.exports = {
 			{
 				test: /\.vue$/,
 				exclude: /node_modules/,
-				use: [{
-					loader: 'vue-loader',
-					options:{
-			            //extractCSS: isProduction,
-			            loaders: isProduction ? ExtractTextWebpackPlugin.extract({
-			            	use: 'css-loader',
-			            	fallback: 'vue-style-loader'
-			            }) : ['vue-style-loader', 'css-loader'],
-			            preserveWhitespace: false
-					}
-				}]
+				loader: 'vue-loader',
+				options: {
+					loaders: isProduction ? ExtractTextWebpackPlugin.extract({
+		            	use: 'css-loader',
+		            	fallback: 'vue-style-loader'
+		            }) : ['vue-style-loader', 'css-loader'],
+		            preserveWhitespace: false,
+		            esModule: false
+				}
 			},
 			{
 				test: /\.css$/,
 				exclude: /node_modules/,
 		        use: isProduction ? ExtractTextWebpackPlugin.extract({
-		        	use: ['css-loader', 'postcss-loader'],
+		        	use: ['css-loader?minimize', 'postcss-loader'],
 		        	fallback: 'vue-style-loader'
 		        }) : ['vue-style-loader', 'css-loader', 'postcss-loader']
 			},
