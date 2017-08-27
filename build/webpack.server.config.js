@@ -6,7 +6,7 @@ const webpackMerge = require('webpack-merge');
 module.exports = webpackMerge(baseConfig, {
   	devtool: '#source-map',
 	target: 'node',
-    entry: './server-main.js',
+    entry: './src/server-main.js',
 	output: {
 		filename: 'server-bundle.js', 
 		libraryTarget: 'commonjs2'	// This tells the server bundle to use Node-style exports

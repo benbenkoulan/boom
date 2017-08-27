@@ -20,7 +20,7 @@ let vender = ['vue', 'core-js/shim'];
 
 let clientConfig = webpackMerge(baseConfig, {
 	entry: {
-		main: ['./client-main.js'],
+		main: ['./src/client-main.js'],
 		vender
 	},
 	plugins,

@@ -11,7 +11,7 @@ let app = new express();
 app.use(compression());//采用gzip压缩，也可以通过nginx压缩
 let readyPromise,
 	bundleRenderer,
-	template = fs.readFileSync(path.join(path.resolve('./'), 'index.html'), 'utf-8');
+	template = fs.readFileSync(path.join(path.resolve('./src'), 'index.html'), 'utf-8');
 const { createBundleRenderer } = require('vue-server-renderer');
 
 const createRenderer = (bundle, options) => {
@@ -49,7 +49,7 @@ if(isDev){//开发环境使用webpack-dev-server
 		bundleRenderer = createRenderer(bundle, options);
 	});
 } else {//读取磁盘文件
-	let distPath = path.resolve('../dist');
+	let distPath = path.resolve('./dist');
 	//托管静态资源,不通过express
 	app.use('/img', express.static(path.join(distPath, 'img')));
 	app.use('/css', express.static(path.join(distPath, 'css')));
@@ -71,7 +71,7 @@ app.get(/[^json]$/, isDev ? (req, res) => {
 
 app.get(/.json$/, (req, res) => {
 	res.type('.html');
-	let basePath = isDev ? './' : '../dist';
+	let basePath = isDev ? './' : './dist';
 	basePath = path.resolve(basePath);
 	let filePath = path.join(basePath, req.path);
 	if(fs.existsSync(filePath)){
