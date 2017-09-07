@@ -1,6 +1,6 @@
 import common from './css/style';
 import Vue from 'vue';
-import store from './store';
+//import store from './store';
 import shim from 'core-js/shim';
 import ajax from 'util/ajax';
 /*import mock from './util/mock';*/
@@ -17,8 +17,8 @@ win.G = { ajax, Vue };
 
 let firstPage = true;
 
-let initialState = win.__INITIAL_STATE__ || {};
-let pageData = initialState.data || {};
+/*let initialState = win.__INITIAL_STATE__ || {};
+let pageData = initialState.data;
 doc.addEventListener('click', e => {
 	let target = e.target;
 	let a = getA(target);
@@ -26,7 +26,7 @@ doc.addEventListener('click', e => {
 		e.preventDefault();
 		route(a);
 	}
-});
+});*/
 
 //获取A标签
 let getA = (target => {
@@ -86,10 +86,10 @@ let route = (node => {
 	}
 });
 
-win.addEventListener('popstate', () => {
+/*win.addEventListener('popstate', () => {
 	route();
 });
-route();
+route();*/
 
 Vue.config.errorHandler = (err, vm, info) => {
 	console.log('---------errorHandler---------------start---');
@@ -98,38 +98,43 @@ Vue.config.errorHandler = (err, vm, info) => {
 	console.log('---------errorHandler---------------end-----');
 }
 
-/*import vueRouter from 'vue-router';
-import index from './page/index/index';
-import car from './page/car/index';
-import account from './page/account/index';
-import App from './App';
+import createApp from './app';
 
-vue.use(vueRouter);
 
-var router = new vueRouter({
-	routes: [{
-		path: '/',
-		name: 'index',
-		redirect: '/index',
-		component: index
-	},{
-		path: '/car.htm',
-		name: 'car',
-		component: car
-	},{
-		path: '/account.htm',
-		name: 'account',
-		component: account
-	},{
-		path: '/index',
-		name: 'index2',
-		component: index
-	}]
+// a global mixin that calls `asyncData` when a route component's params change
+Vue.mixin({
+  beforeRouteUpdate (to, from, next) {
+  	console.log('----------beforeRouteUpdate----------');
+  	console.log(to);
+	console.log(fr);
+	console.log(next);
+  	console.log('----------beforeRouteUpdate----------');
+    const { asyncData } = this.$options
+    if (asyncData) {
+      asyncData({
+        store: this.$store,
+        route: to
+      }).then(next).catch(next)
+    } else {
+      next()
+    }
+  }
+})
+
+const { app, router, store } = createApp();
+
+if (window.__INITIAL_STATE__) {
+  	store.replaceState(window.__INITIAL_STATE__);
+}
+router.onReady(() => {
+	router.beforeResolve((to, fr, next) => {
+		const matched = router.getMatchedComponents(to);
+		Promise.all(matched.map(c => {
+			if(c.fetchData) c.fetchData(store);
+		})).then(() => {
+			next();
+		})
+	});
+	// actually mount to DOM
+  	app.$mount('#page');
 });
-
-var v = new vue({
-	el: '.page',
-	router,
-	store,
-	render: h => h(App)
-})*/

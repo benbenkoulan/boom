@@ -26,6 +26,5 @@ let clientConfig = webpackMerge(baseConfig, {
 	plugins,
 	devtool: '#source-map'
 });
-console.log(clientConfig);
 
 module.exports = clientConfig;

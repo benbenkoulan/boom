@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import ajax from './util/ajax';
 import mock from './util/mock';
+import createApp from './app.js';
 
 global.G = { ajax, Vue };
 
@@ -12,18 +13,14 @@ Vue.config.errorHandler = (err, vm, info) => {
 }
 
 export default context => {
-	var initialState = context.initialState = {};
+	/*var initialState = context.initialState = {};
 	let url = context.url;
 	url = url.split('?')[0]
 	let filePath = url.replace(/^\//, '').replace(/.(htm|html)$/, '') || 'index';//首页
-	let page = require('./page/' + filePath + '/index.vue');
+	let page = require('./page/' + filePath + '/index');
 	context.title = page.title || 'Boom';
-	console.log('-----before---new---------');
-	let vm = new Vue({
-		render: h => h(page)
-	});
-	console.log('-----after---new---------');
-	if(vm.getData){
+	console.log('-----before---new---------');*/
+	/*if(vm.getData){
 		return new Promise((reslove, reject) => {
 			let getDataPromise = vm.getData();
 			if(getDataPromise instanceof Promise){
@@ -39,8 +36,20 @@ export default context => {
 		});
 	} else {
 		return vm;
-	}
-	/*page.components = page.components || {};
-	page.components.top = top;
-	page.components.footerNav = footerNav;*/
+	}*/
+	context.title = 'BOOM';
+	return new Promise((reslove, reject) => {
+		const { app, router, store } = createApp();
+		router.push({path: context.url});
+		
+		router.onReady(() => {
+			const matchedComponents = router.getMatchedComponents();
+			Promise.all(matchedComponents.map(component => {
+				if(component.fetchData) return component.fetchData(store);
+			})).then(data => {
+				context.state = store.state;
+				reslove(app);	
+			});
+		});
+	});
 }

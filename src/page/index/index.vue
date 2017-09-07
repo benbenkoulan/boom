@@ -29,12 +29,12 @@
 			<p>{{tipMsg}}</p>
 		</tip>
 		<loading :show="showLoading"></loading>
-		<footer-nav></footer-nav>
+		<bottom></bottom>
 	</div>
 </template>
 <script>
 	import top from '../com/top';
-	import footerNav from '../com/footerNav';
+	import bottom from '../com/bottom';
 	import loading from 'com/loading';
 	import alert from 'com/alert';
 	import tip from 'com/tip';
@@ -52,7 +52,7 @@
 			}
 		},
 		title: '首页',
-		components: { alert, loading, tip, top, footerNav, productList },
+		components: { alert, loading, tip, top, bottom, productList },
 		beforeCreate (){
 			console.log('------beforeCreate-----------');
 		},

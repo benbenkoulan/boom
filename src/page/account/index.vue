@@ -4,14 +4,14 @@
 		<a class="dib notepad2" href="/notepad.htm">记事本2</a>
 		<a class="dib notepad3" href="/notepad.htm">记事本3</a>
 		<a class="dib notepad1" href="/notepad.htm">记事本1</a>
-		<footer-nav :index="3"></footer-nav>
+		<bottom :index="3"></bottom>
 	</div>
 </template>
 <script>
 	import top from '../com/top';
-	import footerNav from '../com/footerNav';
+	import bottom from '../com/bottom';
 	export default {
-		components: { top, footerNav },
+		components: { top, bottom },
 		title: '我的账户'
 	}
 </script>

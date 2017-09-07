@@ -17,8 +17,7 @@ module.exports = {
 	output: {
 		publicPath: '/',
 		path: path.resolve('./dist'),
-		filename: `js/[${isProduction ? 'chunkhash' : 'hash'}:8].[name].js`,	//热模块替换不支持chunkhash(每次文件变化才会变)，开发时使用hash(每次编译都会变化)
-		chunkFilename: 'js/module/[chunkhash:8].js'
+		filename: `js/[${isProduction ? 'chunkhash' : 'hash'}:8].[name].js`//热模块替换不支持chunkhash(每次文件变化才会变)，开发时使用hash(每次编译都会变化)
 	},
 	module: {
 		rules: [
@@ -32,12 +31,13 @@ module.exports = {
 				exclude: /node_modules/,
 				loader: 'vue-loader',
 				options: {
-					loaders: isProduction ? ExtractTextWebpackPlugin.extract({
-		            	use: 'css-loader',
-		            	fallback: 'vue-style-loader'
-		            }) : ['vue-style-loader', 'css-loader'],
+					exrtactCSS: isProduction,
 		            preserveWhitespace: false,
-		            esModule: false
+		            postcss: [
+					    require('autoprefixer')({
+					      browsers: ['last 3 versions']
+					    })
+					]
 				}
 			},
 			{
@@ -65,7 +65,8 @@ module.exports = {
 			img: path.resolve('./src/img'),
 			com: path.resolve('./src/com'),
 			css: path.resolve('./src/css'),
-			vue$: path.resolve('./lib/vue.runtime.esm')
+			vue$: path.resolve('./lib/vue.runtime.esm'),
+			views: path.resolve('./src/views')
 		},
 		extensions: ['.js', '.vue', '.css']
 	}

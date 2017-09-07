@@ -2,7 +2,6 @@ const express = require('express');
 const compression = require('compression');
 const path = require('path');
 const fs = require('fs');
-const serialize = require('node-serialize');
 const LRU = require('lru-cache')
 
 const isDev = (process.env.NODE_ENV === 'development');
@@ -32,9 +31,7 @@ const render = (req, res) => {
 	});
 
 	stream.on('end', () => {
-		res.end(`<script>window.__INITIAL_STATE__=
-			${serialize.serialize(context.initialState)}
-		</script>` + response);
+		res.end(response);
 	});
 
 	stream.on('error', error => {
@@ -56,8 +53,8 @@ if(isDev){//开发环境使用webpack-dev-server
 	app.use('/js', express.static(path.join(distPath, 'js')));
 
 
-	const bundle = require('../dist/vue-ssr-server-bundle.json');
-	const clientManifest = require('../dist/vue-ssr-client-manifest.json');
+	const bundle = require('./dist/vue-ssr-server-bundle.json');
+	const clientManifest = require('./dist/vue-ssr-client-manifest.json');
 	bundleRenderer = createRenderer(bundle, {
 		clientManifest
 	});

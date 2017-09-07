@@ -4,12 +4,12 @@
 			{{tipMsg}}
 		</tip>
 		<button @click="clearCart">清空购物车</button>
-		<footer-nav :index="2"></footer-nav>
+		<bottom :index="2"></bottom>
 	</div>
 </template>
 <script>
 	import tip from 'com/tip';
-	import footerNav from '../com/footerNav';
+	import bottom from '../com/bottom';
 	export default {
 		data (){
 			return {
@@ -18,7 +18,7 @@
 			}
 		},
 		title: '购物车',
-		components: { tip, footerNav },
+		components: { tip, bottom },
 		methods: {
 			clearCart (){
 				this.$store.dispatch('clearCart').then(() => {
