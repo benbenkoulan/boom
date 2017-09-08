@@ -37,14 +37,14 @@ export default context => {
 	} else {
 		return vm;
 	}*/
-	context.title = 'BOOM';
 	return new Promise((reslove, reject) => {
 		const { app, router, store } = createApp();
 		router.push({path: context.url});
-		
+		console.log(context.url);
 		router.onReady(() => {
 			const matchedComponents = router.getMatchedComponents();
 			Promise.all(matchedComponents.map(component => {
+				context.title = component.title || 'BOOM';
 				if(component.fetchData) return component.fetchData(store);
 			})).then(data => {
 				context.state = store.state;

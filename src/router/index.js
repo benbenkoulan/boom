@@ -3,8 +3,9 @@ import vueRouter from 'vue-router';
 
 Vue.use(vueRouter);
 
-const getIndexView = () => System.import('../views/index/index');
-const getMyView = () => System.import('../views/my/index');
+const getIndexView = () => System.import('../views/index');
+const getMyView = () => System.import('../views/my');
+const getEventsView = () => System.import('../views/events');
 
 export function createRouter() {
 	return new vueRouter({
@@ -20,6 +21,10 @@ export function createRouter() {
 			name: 'my',
 			path: '/my',
 			component: getMyView
+		},{
+			name: 'events',
+			path: '/events',
+			component: getEventsView
 		}]
 	})
 }

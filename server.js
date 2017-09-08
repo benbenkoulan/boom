@@ -60,6 +60,12 @@ if(isDev){//开发环境使用webpack-dev-server
 	});
 }
 
+/*app.get('*', isDev ? (req, res) => {
+	readyPromise.then(() => {
+		render(req, res);
+	}) 	
+} : render);*/
+
 app.get(/[^json]$/, isDev ? (req, res) => {
 	readyPromise.then(() => {
 		render(req, res);

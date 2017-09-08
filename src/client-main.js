@@ -130,7 +130,7 @@ router.onReady(() => {
 	router.beforeResolve((to, fr, next) => {
 		const matched = router.getMatchedComponents(to);
 		Promise.all(matched.map(c => {
-			if(c.fetchData) c.fetchData(store);
+			if(c.fetchData) return c.fetchData(store);
 		})).then(() => {
 			next();
 		})

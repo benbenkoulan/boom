@@ -61,6 +61,7 @@ module.exports = {
 	plugins,
 	resolve: {
 		alias: {
+			api: path.resolve('./src/api'),
 			util: path.resolve('./src/util'),
 			img: path.resolve('./src/img'),
 			com: path.resolve('./src/com'),

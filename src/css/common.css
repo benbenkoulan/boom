@@ -45,3 +45,5 @@
 .cfx:after { display: block; content: ''; clear: both; visibility: hidden; }
 .fl { float: left; }
 .fr { float: right; }
+
+.tc { text-align: center; }

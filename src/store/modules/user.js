@@ -2,26 +2,26 @@ let state = {
 	user: {
 		id: 0,
 		age: 0,
-		userName: ''
+		name: ''
 	}
 }
 
 const mutations = {
-	getUserInfo(){
+	FETCH_USER(state){
 		state.user = {
 			id: 1,
 			age: 20,
-			userName: '李奔'
+			name: '李奔'
 		}
 	}
 }
 
 const actions = {
-	getUserInfo(context){
-		context.commit('getUserInfo');
+	FETCH_USER(context){
+		context.commit('FETCH_USER');
 	}
 }
- 
+
 const getters = {
 	user: state => {
 		return state.user;
